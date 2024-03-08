@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "api"
+version = "0.1.0"
+description = ""
+authors = ["leonardogonfiantini <lp.gonfiantini@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ormar = "^0.12.2"
+fastapi = "^0.110.0"
+uvicorn = "^0.27.1"
+SQLAlchemy = "^1.4.40"
+asyncpg = "^0.29.0"
+
+[tool.poetry.scripts]
+start = "api.main:start"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
