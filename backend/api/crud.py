@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from schema import Category, Supplier, Product, RawProduct, ProductRecipe, Order, OrderDetails, Transaction
-from models import CategoryCreate, SupplierCreate, ProductCreate, RawProductCreate, ProductRecipeCreate, OrderCreate, OrderDetailsCreate, TransactionCreate
+from schema import Category, Supplier, Product, RawProduct, ProductRecipe, Order, Transaction
+from models import CategoryCreate, SupplierCreate, ProductCreate, RawProductCreate, ProductRecipeCreate, OrderCreate, TransactionCreate
 
 
 def create_category(db: Session, category: CategoryCreate):
@@ -10,14 +10,11 @@ def create_category(db: Session, category: CategoryCreate):
     db.refresh(db_category)
     return db_category
 
-
 def get_category(db: Session, name: str):
     return db.query(Category).filter(Category.name == name).first()
 
-
 def get_categories(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Category).offset(skip).limit(limit).all()
-
 
 def create_supplier(db: Session, supplier: SupplierCreate):
     db_supplier = Supplier(**supplier.dict())
@@ -73,6 +70,7 @@ def get_product_recipes(db: Session, skip: int = 0, limit: int = 10):
 
 def create_order(db: Session, order: OrderCreate):
     db_order = Order(**order.dict())
+    print(db_order)
     db.add(db_order)
     db.commit()
     db.refresh(db_order)
@@ -83,19 +81,6 @@ def get_order(db: Session, id_order: int):
 
 def get_orders(db: Session, skip: int = 0, limit: int = 10):
     return db.query(Order).offset(skip).limit(limit).all()
-
-def create_order_details(db: Session, order_details: OrderDetailsCreate):
-    db_order_details = OrderDetails(**order_details.dict())
-    db.add(db_order_details)
-    db.commit()
-    db.refresh(db_order_details)
-    return db_order_details
-
-def get_order_details(db: Session, id_order: int, id_prod: int):
-    return db.query(OrderDetails).filter(OrderDetails.id_order == id_order, OrderDetails.id_prod == id_prod).first()
-
-def get_order_details(db: Session, skip: int = 0, limit: int = 10):
-    return db.query(OrderDetails).offset(skip).limit(limit).all()
 
 def create_transaction(db: Session, transaction: TransactionCreate):
     db_transaction = Transaction(**transaction.dict())

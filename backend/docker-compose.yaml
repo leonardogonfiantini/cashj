@@ -1,9 +1,7 @@
 version: "3.8"
 services:
   db:
-    build:
-      context: .
-      dockerfile: docker/postgres/Dockerfile
+    image: postgres:15
     container_name: pgdb
     healthcheck:
           test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]

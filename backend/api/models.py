@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from typing import Optional
-from datetime import datetime
+
+from pydantic import BaseModel
+from typing import List, Optional
 
 class CategoryBase(BaseModel):
     name: str
@@ -40,14 +42,14 @@ class ProductCreate(ProductBase):
 
 class Product(ProductBase):
     id_prod: int
-    category: Optional[Category]
+    category: Optional[Category] = None
 
     class Config:
         orm_mode = True
 
 class RawProductBase(BaseModel):
     name: str
-    uom: str
+    uom: Optional[str] = None
     amount: float
 
 class RawProductCreate(RawProductBase):
@@ -68,39 +70,26 @@ class ProductRecipeCreate(ProductRecipeBase):
     pass
 
 class ProductRecipe(ProductRecipeBase):
-    class Config:
-        orm_mode = True
+    pass
 
 class OrderBase(BaseModel):
-    date: datetime
-    table_number: str
+    date: str
+    billNo: int
+    table: str
+    discount: Optional[float] = None
+    price: float
+    order_details: dict
 
 class OrderCreate(OrderBase):
     pass
 
 class Order(OrderBase):
-    id_order: int
-
-    class Config:
-        orm_mode = True
-
-class OrderDetailsBase(BaseModel):
-    id_order: int
-    id_prod: int
-    quantity: int
-    discount: Optional[float] = None
-
-class OrderDetailsCreate(OrderDetailsBase):
     pass
-
-class OrderDetails(OrderDetailsBase):
-    class Config:
-        orm_mode = True
 
 class TransactionBase(BaseModel):
     id_supplier: int
     id_raw: int
-    date: datetime
+    date: str
     amount: float
     price: Optional[float] = None
 
@@ -108,5 +97,4 @@ class TransactionCreate(TransactionBase):
     pass
 
 class Transaction(TransactionBase):
-    class Config:
-        orm_mode = True
+    pass
