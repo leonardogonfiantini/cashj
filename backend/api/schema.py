@@ -1,70 +1,63 @@
-from sqlalchemy import Column, ForeignKey, Integer, Numeric, String, Text, DateTime, UniqueConstraint
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import relationship
+from sqlmodel import SQLModel, Field, Relationship
+from sqlalchemy import Column, JSON, ForeignKeyConstraint
+from typing import Optional, List
 
-from database import Base
-
-class Category(Base):
-    __tablename__ = "Category"
-    name = Column(String(255), primary_key=True)
-    description = Column(Text)
-
-class Supplier(Base):
-    __tablename__ = "Supplier"
-    id_supplier = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(255), nullable=False)
-    address = Column(String(255))
-    phone = Column(String(20))
-    email = Column(String(255))
-
-class Product(Base):
-    __tablename__ = "Product"
-    id_prod = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(255), nullable=False)
-    description = Column(Text)
-    price_u_table = Column(Numeric(10, 2), nullable=False)
-    price_u_retail = Column(Numeric(10, 2), nullable=False)
-    category_name = Column(String(255), ForeignKey('Category.name', ondelete="SET NULL"))
-    category = relationship("Category")
-
-class RawProduct(Base):
-    __tablename__ = "Raw_Product"
-    id_raw = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(255), nullable=False)
-    uom = Column(String(10))
-    amount = Column(Numeric(10, 4), nullable=False)
-
-class ProductRecipe(Base):
-    __tablename__ = "Product_Recipe"
-    id_prod = Column(Integer, ForeignKey('Product.id_prod', ondelete="CASCADE"), primary_key=True)
-    id_raw = Column(Integer, ForeignKey('Raw_Product.id_raw', ondelete="CASCADE"), primary_key=True)
-    amount = Column(Numeric(10, 4), nullable=False)
-    product = relationship("Product")
-    raw_product = relationship("RawProduct")
-
-class Order(Base):
-    __tablename__ = "Order"
-
-    billNo = Column(Integer, nullable=False, primary_key=True)
+class Category(SQLModel, table=True):
+    name: str = Field(default=None, primary_key=True)
+    description: str
     
-    date = Column(DateTime, nullable=False)
-    table = Column(String(30), nullable=False)
-    
-    discount = Column(Numeric(10, 2))
-    price = Column(Numeric(10, 2), nullable=False)
-    
-    order_details = Column(JSONB, nullable=False)
-    
-    __table_args__ = (
-        (UniqueConstraint('date', 'table', name='unique_order')),
-    )
+    products: List["Product"] = Relationship(back_populates="category")
 
+class Supplier(SQLModel, table=True):
+    id_supplier: int = Field(default=None, primary_key=True)
+    name: str
+    address: Optional[str] = None
+    phone: Optional[str] = None
+    email: Optional[str] = None
 
-class Transaction(Base):
-    __tablename__ = "Transaction"
-    id_supplier = Column(Integer, ForeignKey('Supplier.id_supplier', ondelete="CASCADE"), primary_key=True)
-    id_raw = Column(Integer, ForeignKey('Raw_Product.id_raw', ondelete="CASCADE"), primary_key=True)
-    date = Column(DateTime, primary_key=True)
-    amount = Column(Numeric(10, 4), nullable=False)
-    price = Column(Numeric(10, 2))
+class Product(SQLModel, table=True):
+    id_prod: int = Field(default=None, primary_key=True)
+    name: str
+    description: str
+    price_u_table: float
+    price_u_retail: float
+    category_name: str = Field(default=None, foreign_key="category.name")
+    
+    category: Optional[Category] = Relationship(back_populates="products")
 
+    product_recipes: List["ProductRecipe"] = Relationship(back_populates="product")
+
+class RawProduct(SQLModel, table=True):
+    id_raw: int = Field(default=None, primary_key=True)
+    name: str
+    uom: str
+    amount: float
+    
+    product_recipes: List["ProductRecipe"] = Relationship(back_populates="rawproduct")
+
+class ProductRecipe(SQLModel, table=True):
+    id_prod: int = Field(default=None, foreign_key="product.id_prod", primary_key=True)
+    id_raw: int = Field(default=None, foreign_key="rawproduct.id_raw", primary_key=True)
+    amount: float
+    
+    product: Optional[Product] = Relationship(back_populates="product_recipes")
+    rawproduct: Optional[RawProduct] = Relationship(back_populates="product_recipes")
+    
+class Order(SQLModel, table=True):
+    billNo: int = Field(default=None, primary_key=True)
+    date: str
+    table: str
+    discount: Optional[float] = None
+    price: float
+    order_details: dict = Field(default={}, sa_column=Column(JSON))
+
+    class Config:
+        arbitrary_types_allowed = True
+
+class Transaction(SQLModel, table=True):
+    id_supplier: int = Field(default=None, primary_key=True)
+    id_raw: int = Field(default=None, primary_key=True)
+    date: str = Field(default=None, primary_key=True)
+    amount: float
+    price: Optional[float] = None
+    
