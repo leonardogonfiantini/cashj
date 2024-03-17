@@ -14,6 +14,8 @@ class Supplier(SQLModel, table=True):
     address: Optional[str] = None
     phone: Optional[str] = None
     email: Optional[str] = None
+    
+    transactions: List["Transaction"] = Relationship(back_populates="supplier")
 
 class Product(SQLModel, table=True):
     id_prod: int = Field(default=None, primary_key=True)
@@ -34,7 +36,8 @@ class RawProduct(SQLModel, table=True):
     amount: float
     
     product_recipes: List["ProductRecipe"] = Relationship(back_populates="rawproduct")
-
+    transactions: List["Transaction"] = Relationship(back_populates="rawproduct")
+    
 class ProductRecipe(SQLModel, table=True):
     id_prod: int = Field(default=None, foreign_key="product.id_prod", primary_key=True)
     id_raw: int = Field(default=None, foreign_key="rawproduct.id_raw", primary_key=True)
@@ -55,9 +58,11 @@ class Order(SQLModel, table=True):
         arbitrary_types_allowed = True
 
 class Transaction(SQLModel, table=True):
-    id_supplier: int = Field(default=None, primary_key=True)
-    id_raw: int = Field(default=None, primary_key=True)
+    id_supplier: int = Field(default=None, foreign_key="supplier.id_supplier", primary_key=True)
+    id_raw: int = Field(default=None, foreign_key="rawproduct.id_raw", primary_key=True)
     date: str = Field(default=None, primary_key=True)
     amount: float
     price: Optional[float] = None
     
+    supplier: Optional[Supplier] = Relationship(back_populates="transactions")
+    rawproduct: Optional[RawProduct] = Relationship(back_populates="transactions")

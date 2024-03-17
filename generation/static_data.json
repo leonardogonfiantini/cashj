@@ -1,690 +1,225 @@
 {
-    "supplier": [
-        {
-            "id_supplier": 1,
-            "name": "Amazon",
-            "address": "Via delle tarantole, 1, Sant'Ilario",
-            "email": "sonoamazon@mail.it",
-            "phone": "3456786780"
-        },
-        {
-            "id_supplier": 2,
-            "name": "Sogegross",
-            "address": "Piazza dei girasoli 5, San Fruttuoso",
-            "email": "sososogegross@mail.it",
-            "phone": "3469012345"
-        },
-        {
-            "id_supplier": 3,
-            "name": "Coop",
-            "address": "Via dei papaveri 3, San Martino",
-            "email": null,
-            "phone": "3456756543"
-        },
-        {
-            "id_supplier": 4,
-            "name": "Mimmo",
-            "address": "Viale di Mimmo 7, Genova Sampierdarena",
-            "email": null,
-            "phone": null
-        },
-        {
-            "id_supplier": 5,
-            "name": "UnCaliceDiVinoEdUnaBellaCanzoneTop",
-            "address": null,
-            "email": null,
-            "phone": null
-        }        
-    ],
 
-    "product": [
-        {
-            "id_prod": 1,
-            "name": "Caffè",
-            "description": "Caffè miscela 100% arabica",
-            "price_u_retail": 1.00,
-            "price_u_table": 1.50,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 2,
-            "name": "Cappuccino",
-            "description": "Caffè con latte e schiuma di latte",
-            "price_u_retail": 1.50,
-            "price_u_table": 2.00,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 3,
-            "name": "Latte",
-            "description": "Latte intero, caldo o freddo",
-            "price_u_retail": 1.00,
-            "price_u_table": 1.50,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 4,
-            "name": "Coca cola",
-            "description": "Bibita gassata",
-            "price_u_retail": 2.50,
-            "price_u_table": 3.00,
-            "category_name": "Bibite"
-        },
-        {
-            "id_prod": 5,
-            "name": "Fanta",
-            "description": "Bibita gassata",
-            "price_u_retail": 2.50,
-            "price_u_table": 3.00,
-            "category_name": "Bibite"
-        },
-        {
-            "id_prod": 6,
-            "name": "Gin tonic",
-            "description": "Gin di linea + acqua tonica + limone",
-            "price_u_retail": 6.00,
-            "price_u_table": 7.00,
-            "category_name": "Drink"
-        },
-        {
-            "id_prod": 7,
-            "name": "Spritz",
-            "description": "Aperol + prosecco + acqua tonica + arancia",
-            "price_u_retail": 5.00,
-            "price_u_table": 6.00,
-            "category_name": "Drink"
-        },
-        {
-            "id_prod": 8,
-            "name": "Prosecco",
-            "description": "Vino spumante cantine Scala",
-            "price_u_retail": 5.00,
-            "price_u_table": 6.00,
-            "category_name": "Vini"
-        },
-        {
-            "id_prod": 9,
-            "name": "Birra piccola bionda alla spina",
-            "description": "Birra artigianale GonfiantiniTM 20ml",
-            "price_u_retail": 3.50,
-            "price_u_table": 4.00,
-            "category_name": "Birre"
-        },
-        {
-            "id_prod": 10,
-            "name": "Birra media bionda alla spina",
-            "description": "Birra artigianale GonfiantiniTM 40ml",
-            "price_u_retail": 5.00,
-            "price_u_table": 6.00,
-            "category_name": "Birre"
-        },
-        {
-            "id_prod": 11,
-            "name": "Birra in bottiglia",
-            "description": "Birra commerciale 33ml",
-            "price_u_retail": 4.00,
-            "price_u_table": 5.00,
-            "category_name": "Birre"
-        },
-        {
-            "id_prod": 12,
-            "name": "Birra weiss / blanche in bottiglia",
-            "description": "Birra artigianale GonfiantiniTM 66ml",
-            "price_u_retail": 6.00,
-            "price_u_table": 6.50,
-            "category_name": "Birre"
-        },
-        {
-            "id_prod": 13,
-            "name": "Vermentino liguria doc",
-            "description": "Vino bianco della casa al calice",
-            "price_u_retail": 5.00,
-            "price_u_table": 6.00,
-            "category_name": "Vini"
-        },
-        {
-            "id_prod": 14,
-            "name": "Camatti",
-            "description": "Amaro alle erbe mentolato Genovese, vincitore del premio per l'amaro dell'anno 2023",
-            "price_u_retail": 3.00,
-            "price_u_table": 4.00,
-            "category_name": "Amari"
-        },
-        {
-            "id_prod": 15,
-            "name": "Limoncello",
-            "description": "Limoncello fatto in casa",
-            "price_u_retail": 3.00,
-            "price_u_table": 4.00,
-            "category_name": "Amari"
-        },
-        {
-            "id_prod": 16,
-            "name": "Grappa",
-            "description": "Grappa di Moscato",
-            "price_u_retail": 3.00,
-            "price_u_table": 4.00,
-            "category_name": "Amari"
-        },
-        {
-            "id_prod": 17,
-            "name": "Patatine",
-            "description": "Patatine fritte",
-            "price_u_retail": 2.00,
-            "price_u_table": 3.00,
-            "category_name": "Cibi"
-        },
-        {
-            "id_prod": 18,
-            "name": "Olive",
-            "description": "Olive miste",
-            "price_u_retail": 2.00,
-            "price_u_table": 3.00,
-            "category_name": "Cibi"
-        },
-        {
-            "id_prod": 19,
-            "name": "Panino con salame",
-            "description": "Panino con salame piccante",
-            "price_u_retail": 4.00,
-            "price_u_table": 5.00,
-            "category_name": "Cibi"
-        },
-        {
-            "id_prod": 20,
-            "name": "Panino con prosciutto",
-            "description": "Panino con prosciutto crudo",
-            "price_u_retail": 4.00,
-            "price_u_table": 5.00,
-            "category_name": "Cibi"
-        },
-        {
-            "id_prod": 21,
-            "name": "Long Island Iced Tea",
-            "description": "Cocktail a base di vodka, gin, rum, tequila, triple sec, zucchero, succo di limone e coca cola",
-            "price_u_retail": 8.00,
-            "price_u_table": 9.00,
-            "category_name": "Drink"
-        },
-        {
-            "id_prod": 22,
-            "name": "Mojito",
-            "description": "Cocktail a base di rum, zucchero, lime, menta e acqua gassata",
-            "price_u_retail": 7.00,
-            "price_u_table": 8.00,
-            "category_name": "Drink"
-        },
-        {
-            "id_prod": 23,
-            "name": "Caipirinha",
-            "description": "Cocktail a base di cachaça, lime e zucchero",
-            "price_u_retail": 7.00,
-            "price_u_table": 8.00,
-            "category_name": "Drink"
-        },
-        {
-            "id_prod": 24,
-            "name": "Margarita",
-            "description": "Cocktail a base di tequila, triple sec e succo di lime",
-            "price_u_retail": 7.00,
-            "price_u_table": 8.00,
-            "category_name": "Drink"
-        },
-        {
-            "id_prod": 25,
-            "name": "Negroni",
-            "description": "Cocktail a base di gin, vermouth rosso e campari",
-            "price_u_retail": 7.00,
-            "price_u_table": 8.00,
-            "category_name": "Drink"
-        },
-        {
-            "id_prod": 26,
-            "name": "Caffè corretto",
-            "description": "Caffè con aggiunta di amaro a scelta",
-            "price_u_retail": 1.50,
-            "price_u_table": 2.00,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 27,
-            "name": "Caffè macchiato",
-            "description": "Caffè con aggiunta di latte",
-            "price_u_retail": 1.00,
-            "price_u_table": 1.50,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 28,
-            "name": "Caffè lungo",
-            "description": "Caffè con doppia dose di acqua",
-            "price_u_retail": 1.00,
-            "price_u_table": 1.50,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 29,
-            "name": "Caffè decaffeinato",
-            "description": "Caffè senza caffeina",
-            "price_u_retail": 1.50,
-            "price_u_table": 2.00,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 30,
-            "name": "Caffè doppio",
-            "description": "Doppia dose di caffè",
-            "price_u_retail": 2.00,
-            "price_u_table": 2.50,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 31,
-            "name": "Caffè ristretto",
-            "description": "Caffè con metà dose di acqua",
-            "price_u_retail": 1.00,
-            "price_u_table": 1.50,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 32,
-            "name": "Caffè shakerato",
-            "description": "Caffè con ghiaccio e zucchero",
-            "price_u_retail": 2.50,
-            "price_u_table": 3.50,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 33,
-            "name": "Caffè shakerato con liquore",
-            "description": "Caffè con ghiaccio e liquore a scelta",
-            "price_u_retail": 3.00,
-            "price_u_table": 4.00,
-            "category_name": "Caffetteria"
-        },
-        {
-            "id_prod": 34,
-            "name": "Acqua naturale 1/2 litro",
-            "description": "Acqua minerale naturale",
-            "price_u_retail": 1.50,
-            "price_u_table": 2.00,
-            "category_name": "Bibite"
-        },
-        {
-            "id_prod": 35,
-            "name": "Acqua frizzante 1/2 litro",
-            "description": "Acqua minerale frizzante",
-            "price_u_retail": 1.50,
-            "price_u_table": 2.00,
-            "category_name": "Bibite"
-        },
-        {
-            "id_prod": 36,
-            "name": "Acqua naturale 1,5 litri",
-            "description": "Acqua minerale naturale",
-            "price_u_retail": 2.50,
-            "price_u_table": 3.00,
-            "category_name": "Bibite"
-        },
-        {
-            "id_prod": 37,
-            "name": "Acqua frizzante 1,5 litri",
-            "description": "Acqua minerale frizzante",
-            "price_u_retail": 2.50,
-            "price_u_table": 3.00,
-            "category_name": "Bibite"
-        },
-        {
-            "id_prod": 38,
-            "name": "Ormeasco doc",
-            "description": "Vino rosso della casa al calice",
-            "price_u_retail": 5.00,
-            "price_u_table": 6.00,
-            "category_name": "Vini"
-        }
-        
-    ],
+  "product_rate": [
+    { "id_prod": 1, "rate": [0.9, 0.8] },
+    { "id_prod": 2, "rate": [0.9, 0.8] },
+    { "id_prod": 3, "rate": [0.3, 0.3] },
+    { "id_prod": 4, "rate": [0.5, 0.9] },
+    { "id_prod": 5, "rate": [0.1, 0.3] },
+    { "id_prod": 6, "rate": [0.7, 0.8] },
+    { "id_prod": 7, "rate": [0.6, 1.0] },
+    { "id_prod": 8, "rate": [0.7, 0.7] },
+    { "id_prod": 9, "rate": [0.4, 0.6] },
+    { "id_prod": 10, "rate": [0.5, 0.7] },
+    { "id_prod": 11, "rate": [0.3, 0.5] },
+    { "id_prod": 12, "rate": [0.2, 0.4] },
+    { "id_prod": 13, "rate": [0.3, 0.3] },
+    { "id_prod": 14, "rate": [0.6, 0.5] },
+    { "id_prod": 15, "rate": [0.6, 0.5] },
+    { "id_prod": 16, "rate": [0.5, 0.2] },
+    { "id_prod": 17, "rate": [0.8, 0.9] },
+    { "id_prod": 18, "rate": [0.2, 0.4] },
+    { "id_prod": 19, "rate": [0.3, 0.2] },
+    { "id_prod": 20, "rate": [0.3, 0.3] },
+    { "id_prod": 21, "rate": [0.1, 0.3] },
+    { "id_prod": 22, "rate": [0.1, 0.7] },
+    { "id_prod": 23, "rate": [0.2, 0.2] },
+    { "id_prod": 24, "rate": [0.2, 0.5] },
+    { "id_prod": 25, "rate": [0.7, 0.8] },
+    { "id_prod": 26, "rate": [0.2, 0.1] },
+    { "id_prod": 27, "rate": [0.7, 0.6] },
+    { "id_prod": 28, "rate": [0.5, 0.4] },
+    { "id_prod": 29, "rate": [0.3, 0.2] },
+    { "id_prod": 30, "rate": [0.2, 0.1] },
+    { "id_prod": 31, "rate": [0.3, 0.2] },
+    { "id_prod": 32, "rate": [0.1, 0.6] },
+    { "id_prod": 33, "rate": [0.2, 0.5] },
+    { "id_prod": 34, "rate": [0.6, 0.9] },
+    { "id_prod": 35, "rate": [0.5, 0.8] },
+    { "id_prod": 36, "rate": [0.3, 0.6] },
+    { "id_prod": 37, "rate": [0.3, 0.6] },
+    { "id_prod": 38, "rate": [0.7, 0.5] }
+  ],
 
-    "category": [
-        {
-            "name": "Caffetteria",
-            "description": "Caffè di ogni tipo, cappuccini, latte e tutte le loro varianti"
-        },
-        {
-            "name": "Bibite",
-            "description": "Acqua, bibite gassate, bibite analcoliche"
-        },
-        {
-            "name": "Drink",
-            "description": "Gin tonic, spritz, altri classici e nuove proposte dai nostri mixologist"
-        },
-        {
-            "name": "Vini",
-            "description": "Vini bianchi, rossi, rosati, spumanti, champagne"
-        },
-        {
-            "name": "Birre",
-            "description": "Birre artigianali, birre industriali, birre straniere"
-        },
-        {
-            "name": "Amari",
-            "description": "Amari alle erbe, limoncello, grappa, liquori d'ogni dove"
-        },
-        {
-            "name": "Cibi",
-            "description": "Snack da accompagnamento, piatti Caldi e piatti freddi per pranzi e cene"
-        }        
-    ],
+  "supplier_product": [
+    { "id_supplier": 1, "sell": [20,  21, 31, 19] },
+    { "id_supplier": 2, "sell": [3, 4, 10, 32, 34, 35] },
+    { "id_supplier": 3, "sell": [18, 24, 23] },
+    { "id_supplier": 4, "sell": [1, 2, 29] },
+    { "id_supplier": 5, "sell": [5, 6, 7, 8, 15, 16, 17, 25, 26, 27, 28, 33] },
+    { "id_supplier": 6, "sell": [11, 12, 13] },
+    { "id_supplier": 7, "sell": [9, 14, 36] },
+    { "id_supplier": 8, "sell": [22, 30] }
+  ],
 
-    "raw_product" : [
-        {
-            "id_raw": 1,
-            "name": "caffè in grani",
-            "uom": "kg",
-            "amount": 10
-        },
-        {
-            "id_raw": 2,
-            "name": "latte",
-            "uom": "lt",
-            "amount": 15
-        },
-        {
-            "id_raw": 3,
-            "name": "coca cola",
-            "uom": "pz",
-            "amount": 40
-        },
-        {
-            "id_raw": 4,
-            "name": "fanta",
-            "uom": "pz",
-            "amount": 25
-        },
-        {
-            "id_raw": 5,
-            "name": "gin",
-            "uom": "lt",
-            "amount": 3
-        },
-        {
-            "id_raw": 6,
-            "name": "rum",
-            "uom": "lt",
-            "amount": 2
-        },
-        {
-            "id_raw": 7,
-            "name": "tequila",
-            "uom": "lt",
-            "amount": 1.5
-        },
-        {
-            "id_raw": 8,
-            "name": "vodka",
-            "uom": "lt",
-            "amount": 4.5
-        },
-        {
-            "id_raw": 9,
-            "name": "prosecco",
-            "uom": "lt",
-            "amount": 22
-        },
-        {
-            "id_raw": 10,
-            "name": "Acqua naturale 1/2 litro",
-            "uom": "pz",
-            "amount": 60
-        },
-        {
-            "id_raw": 11,
-            "name": "Birra alla spina",
-            "uom": "lt",
-            "amount": 40
-        },
-        {
-            "id_raw": 12,
-            "name": "Birra in bottiglia",
-            "uom": "pz",
-            "amount": 50
-        },
-        {
-            "id_raw": 13,
-            "name": "Birra weiss / blanche in bottiglia",
-            "uom": "pz",
-            "amount": 30
-        },
-        {
-            "id_raw": 14,
-            "name": "Vermentino liguria doc",
-            "uom": "lt",
-            "amount": 10
-        },
-        {
-            "id_raw": 15,
-            "name": "Amaro alle erbe",
-            "uom": "lt",
-            "amount": 3
-        },
-        {
-            "id_raw": 16,
-            "name": "Limoncello",
-            "uom": "lt",
-            "amount": 2
-        },
-        {
-            "id_raw": 17,
-            "name": "Grappa",
-            "uom": "lt",
-            "amount": 2
-        },
-        {
-            "id_raw": 18,
-            "name": "Patatine",
-            "uom": "pz",
-            "amount": 50
-        },
-        {
-            "id_raw": 19,
-            "name": "Olive",
-            "uom": "pz",
-            "amount": 50
-        },
-        {
-            "id_raw": 20,
-            "name": "Salame",
-            "uom": "kg",
-            "amount": 2
-        },
-        {
-            "id_raw": 21,
-            "name": "Prosciutto",
-            "uom": "kg",
-            "amount": 2
-        },
-        {
-            "id_raw": 22,
-            "name": "Lime",
-            "uom": "kg",
-            "amount": 1
-        },
-        {
-            "id_raw": 23,
-            "name": "Menta",
-            "uom": "kg",
-            "amount": 1
-        },
-        {
-            "id_raw": 24,
-            "name": "Zucchero",
-            "uom": "kg",
-            "amount": 2
-        },
-        {
-            "id_raw": 25,
-            "name": "vermouth rosso",
-            "uom": "lt",
-            "amount": 3
-        },
-        {
-            "id_raw": 26,
-            "name": "Aperol",
-            "uom": "lt",
-            "amount": 3
-        },
-        {
-            "id_raw": 27,
-            "name": "Cachaça",
-            "uom": "lt",
-            "amount": 3
-        },
-        {
-            "id_raw": 28,
-            "name": "Triple sec",
-            "uom": "lt",
-            "amount": 1
-        },
-        {
-            "id_raw": 29,
-            "name": "Caffè decaffeinato in grani",
-            "uom": "kg",
-            "amount": 6
-        }
-    ],
+  "supplier": [
+      { "id_supplier": 1, "name": "Con mollica o senza", "address": "Via delle tarantole, 1, Sant'Ilario", "email": "mollica@senza.it", "phone": "3456786780" },
+      { "id_supplier": 2, "name": "Sogegross", "address": "Piazza dei girasoli 5, San Fruttuoso", "email": "sososogegross@mail.it", "phone": "3469012345" },
+      { "id_supplier": 3, "name": "Coop", "address": "Via dei papaveri 3, San Martino", "email": null, "phone": "3456756543" },
+      { "id_supplier": 4, "name": "Mimmo Caffellatte", "address": "Viale di Mimmo 7, Genova Sampierdarena", "email": null, "phone": null },
+      { "id_supplier": 5, "name": "Liqui-liqui-liquo", "address": null, "email": null, "phone": null },
+      { "id_supplier": 6, "name": "Birrificio Gonfiantini", "address": "Via delle birre 1, Genova", "email": null, "phone": "3456786786" },
+      { "id_supplier": 7, "name": "Cantine Scala", "address": "Via dei vini 1, Genova", "email": null, "phone": "3456436787" },
+      { "id_supplier": 8, "name": "Casa", "address": null, "email": null, "phone": null }
+  ],
 
+  "product": [
+      { "id_prod": 1, "name": "Caffè", "description": "Caffè miscela 100% arabica", "price_u_retail": 1.00, "price_u_table": 1.50, "category_name": "Caffetteria"},
+      { "id_prod": 2, "name": "Cappuccino", "description": "Caffè con latte e schiuma di latte", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Caffetteria"},
+      { "id_prod": 3, "name": "Latte", "description": "Latte intero, caldo o freddo", "price_u_retail": 1.00, "price_u_table": 1.50, "category_name": "Caffetteria"},
+      { "id_prod": 4, "name": "Coca cola", "description": "Bibita gassata", "price_u_retail": 2.50, "price_u_table": 3.00, "category_name": "Bibite"},
+      { "id_prod": 5, "name": "Fanta", "description": "Bibita gassata", "price_u_retail": 2.50, "price_u_table": 3.00, "category_name": "Bibite"},
+      { "id_prod": 6, "name": "Gin tonic", "description": "Gin di linea + acqua tonica + limone", "price_u_retail": 6.00, "price_u_table": 7.00, "category_name": "Drink"},
+      { "id_prod": 7, "name": "Spritz", "description": "Aperol + prosecco + acqua tonica + arancia", "price_u_retail": 5.00, "price_u_table": 6.00, "category_name": "Drink"},
+      { "id_prod": 8, "name": "Prosecco", "description": "Vino spumante cantine Scala", "price_u_retail": 5.00, "price_u_table": 6.00, "category_name": "Vini"},
+      { "id_prod": 9, "name": "Birra piccola bionda alla spina", "description": "Birra artigianale GonfiantiniTM 20ml", "price_u_retail": 3.50, "price_u_table": 4.00, "category_name": "Birre"},
+      { "id_prod": 10, "name": "Birra media bionda alla spina", "description": "Birra artigianale GonfiantiniTM 40ml", "price_u_retail": 5.00, "price_u_table": 6.00, "category_name": "Birre"},
+      { "id_prod": 11, "name": "Birra in bottiglia", "description": "Birra commerciale 33ml", "price_u_retail": 4.00, "price_u_table": 5.00, "category_name": "Birre"},
+      { "id_prod": 12, "name": "Birra weiss / blanche in bottiglia", "description": "Birra artigianale GonfiantiniTM 66ml", "price_u_retail": 6.00, "price_u_table": 6.50, "category_name": "Birre"},
+      { "id_prod": 13, "name": "Vermentino liguria doc", "description": "Vino bianco della casa al calice", "price_u_retail": 5.00, "price_u_table": 6.00, "category_name": "Vini"},
+      { "id_prod": 14, "name": "Camatti", "description": "Amaro alle erbe mentolato Genovese, vincitore del premio per l'amaro dell'anno 2023", "price_u_retail": 3.00, "price_u_table": 4.00, "category_name": "Amari"},
+      { "id_prod": 15, "name": "Limoncello", "description": "Limoncello fatto in casa", "price_u_retail": 3.00, "price_u_table": 4.00, "category_name": "Amari"},
+      { "id_prod": 16, "name": "Grappa", "description": "Grappa di Moscato", "price_u_retail": 3.00, "price_u_table": 4.00, "category_name": "Amari"},
+      { "id_prod": 17, "name": "Patatine", "description": "Patatine fritte", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Cibi"},
+      { "id_prod": 18, "name": "Olive", "description": "Olive miste", "price_u_retail": 2.00, "price_u_table": 3.00, "category_name": "Cibi"},
+      { "id_prod": 19, "name": "Panino con salame", "description": "Panino con salame piccante", "price_u_retail": 4.00, "price_u_table": 5.00, "category_name": "Cibi"},
+      { "id_prod": 20, "name": "Panino con prosciutto", "description": "Panino con prosciutto crudo", "price_u_retail": 4.00, "price_u_table": 5.00, "category_name": "Cibi"},
+      { "id_prod": 21, "name": "Long Island Iced Tea", "description": "Cocktail a base di vodka, gin, rum, tequila, triple sec, zucchero, succo di limone e coca cola", "price_u_retail": 8.00, "price_u_table": 9.00, "category_name": "Drink"},
+      { "id_prod": 22, "name": "Mojito", "description": "Cocktail a base di rum, zucchero, lime, menta e acqua gassata", "price_u_retail": 7.00, "price_u_table": 8.00, "category_name": "Drink"},
+      { "id_prod": 23, "name": "Caipirinha", "description": "Cocktail a base di cachaça, lime e zucchero", "price_u_retail": 7.00, "price_u_table": 8.00, "category_name": "Drink"},
+      { "id_prod": 24, "name": "Margarita", "description": "Cocktail a base di tequila, triple sec e succo di lime", "price_u_retail": 7.00, "price_u_table": 8.00, "category_name": "Drink"},
+      { "id_prod": 25, "name": "Negroni", "description": "Cocktail a base di gin, vermouth rosso e campari", "price_u_retail": 7.00, "price_u_table": 8.00, "category_name": "Drink"},
+      { "id_prod": 26, "name": "Caffè corretto", "description": "Caffè con aggiunta di amaro a scelta", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Caffetteria"},
+      { "id_prod": 27, "name": "Caffè macchiato", "description": "Caffè con aggiunta di latte", "price_u_retail": 1.00, "price_u_table": 1.50, "category_name": "Caffetteria"},
+      { "id_prod": 28, "name": "Caffè lungo", "description": "Caffè con doppia dose di acqua", "price_u_retail": 1.00, "price_u_table": 1.50, "category_name": "Caffetteria"},
+      { "id_prod": 29, "name": "Caffè decaffeinato", "description": "Caffè senza caffeina", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Caffetteria"},
+      { "id_prod": 30, "name": "Caffè doppio", "description": "Doppia dose di caffè", "price_u_retail": 2.00, "price_u_table": 2.50, "category_name": "Caffetteria"},
+      { "id_prod": 31, "name": "Caffè ristretto", "description": "Caffè con metà dose di acqua", "price_u_retail": 1.00, "price_u_table": 1.50, "category_name": "Caffetteria"},
+      { "id_prod": 32, "name": "Caffè shakerato", "description": "Caffè con ghiaccio e zucchero", "price_u_retail": 2.50, "price_u_table": 3.50, "category_name": "Caffetteria"},
+      { "id_prod": 33, "name": "Caffè shakerato con liquore", "description": "Caffè con ghiaccio e liquore a scelta", "price_u_retail": 3.00, "price_u_table": 4.00, "category_name": "Caffetteria"},
+      { "id_prod": 34, "name": "Acqua naturale 1/2 litro", "description": "Acqua minerale naturale", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Bibite"},
+      { "id_prod": 35, "name": "Acqua frizzante 1/2 litro", "description": "Acqua minerale frizzante", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Bibite"},
+      { "id_prod": 36, "name": "Acqua naturale 1,5 litri", "description": "Acqua minerale naturale", "price_u_retail": 2.50, "price_u_table": 3.00, "category_name": "Bibite"},
+      { "id_prod": 37, "name": "Acqua frizzante 1,5 litri", "description": "Acqua minerale frizzante", "price_u_retail": 2.50, "price_u_table": 3.00, "category_name": "Bibite"},
+      { "id_prod": 38, "name": "Ormeasco doc", "description": "Vino rosso della casa al calice", "price_u_retail": 5.00, "price_u_table": 6.00, "category_name": "Vini"}
+  ],
 
-    "product_recipe": [
-        {
-            "id_prod": 1,
-            "id_raw": 1,
-            "amount": 0.1
-        },
-        {
-            "id_prod": 2,
-            "id_raw": 1,
-            "amount": 0.1
-        },
-        {
-            "id_prod": 2,
-            "id_raw": 2,
-            "amount": 0.1
-        },
-        {
-            "id_prod": 3,
-            "id_raw": 2,
-            "amount": 0.1
-        },
-        {
-            "id_prod": 4,
-            "id_raw": 3,
-            "amount": 1
-        },
-        {
-            "id_prod": 5,
-            "id_raw": 4,
-            "amount": 1
-        },
-        {
-            "id_prod": 6,
-            "id_raw": 5,
-            "amount": 0.05
-        },
-        {
-            "id_prod": 6,
-            "id_raw": 6,
-            "amount": 0.05
-        },
-        {
-            "id_prod": 6,
-            "id_raw": 22,
-            "amount": 0.01
-        },
-        {
-            "id_prod": 7,
-            "id_raw": 25,
-            "amount": 0.05
-        },
-        {
-            "id_prod": 7,
-            "id_raw": 26,
-            "amount": 0.05
-        },
-        {
-            "id_prod": 7,
-            "id_raw": 27,
-            "amount": 0.05
-        },
-        {
-            "id_prod": 7,
-            "id_raw": 28,
-            "amount": 0.01
-        },
-        {
-            "id_prod": 7,
-            "id_raw": 22,
-            "amount": 0.01
-        },
-        {
-            "id_prod": 8,
-            "id_raw": 9,
-            "amount": 0.15
-        },
-        {
-            "id_prod": 9,
-            "id_raw": 11,
-            "amount": 0.4
-        },
-        {
-            "id_prod": 10,
-            "id_raw": 11,
-            "amount": 0.8
-        },
-        {
-            "id_prod": 11,
-            "id_raw": 12,
-            "amount": 1
-        },
-        {
-            "id_prod": 12,
-            "id_raw": 13,
-            "amount": 1
-        },
-        {
-            "id_prod": 13,
-            "id_raw": 14,
-            "amount": 0.15
-        },
-        {
-            "id_prod": 14,
-            "id_raw": 15,
-            "amount": 0.05
-        },
-        {
-            "id_prod": 15,
-            "id_raw": 16,
-            "amount": 0.05
-        },
-        {
-            "id_prod": 16,
-            "id_raw": 17,
-            "amount": 0.05
-        },
-        {
-            "id_prod": 17,
-            "id_raw": 18,
-            "amount": 1
-        },
-        {
-            "id_prod": 18,
-            "id_raw": 19,
-            "amount": 1
-        },
-        {
-            "id_prod": 19,
-            "id_raw": 20,
-            "amount": 0.1
-        }
-    ]
+  "category": [
+      { "name": "Caffetteria", "description": "Caffè di ogni tipo, cappuccini, latte e tutte le loro varianti" },
+      { "name": "Bibite", "description": "Acqua, bibite gassate, bibite analcoliche" },
+      { "name": "Drink", "description": "Gin tonic, spritz, altri classici e nuove proposte dai nostri mixologist" },
+      { "name": "Vini", "description": "Vini bianchi, rossi, rosati, spumanti, champagne" },
+      { "name": "Birre", "description": "Birre artigianali, birre industriali, birre straniere" },
+      { "name": "Amari", "description": "Amari alle erbe, limoncello, grappa, liquori d'ogni dove" },
+      { "name": "Cibi", "description": "Snack da accompagnamento, piatti Caldi e piatti freddi per pranzi e cene" }
+  ],
 
+  "rawproduct" : [
+      { "id_raw": 1, "name": "Caffè in grani", "uom": "kg", "amount": 10 },
+      { "id_raw": 2, "name": "Latte", "uom": "lt", "amount": 15 },
+      { "id_raw": 3, "name": "Coca cola", "uom": "pz", "amount": 40 },
+      { "id_raw": 4, "name": "Fanta", "uom": "pz", "amount": 25 },
+      { "id_raw": 5, "name": "Gin", "uom": "lt", "amount": 3 },
+      { "id_raw": 6, "name": "Rum", "uom": "lt", "amount": 2 },
+      { "id_raw": 7, "name": "Tequila", "uom": "lt", "amount": 1.5 },
+      { "id_raw": 8, "name": "Vodka", "uom": "lt", "amount": 4.5 },
+      { "id_raw": 9, "name": "Prosecco", "uom": "lt", "amount": 22 },
+      { "id_raw": 10, "name": "Acqua naturale 1/2 litro", "uom": "pz", "amount": 60 },
+      { "id_raw": 11, "name": "Birra alla spina", "uom": "lt", "amount": 40 },
+      { "id_raw": 12, "name": "Birra in bottiglia", "uom": "pz", "amount": 50 },
+      { "id_raw": 13, "name": "Birra weiss / blanche in bottiglia", "uom": "pz", "amount": 30 },
+      { "id_raw": 14, "name": "Vermentino liguria doc", "uom": "lt", "amount": 10 },
+      { "id_raw": 15, "name": "Amaro alle erbe", "uom": "lt", "amount": 3 },
+      { "id_raw": 16, "name": "Limoncello", "uom": "lt", "amount": 2 },
+      { "id_raw": 17, "name": "Grappa", "uom": "lt", "amount": 2 },
+      { "id_raw": 18, "name": "Patatine", "uom": "pz", "amount": 50 },
+      { "id_raw": 19, "name": "Olive", "uom": "pz", "amount": 50 },
+      { "id_raw": 20, "name": "Salame", "uom": "kg", "amount": 2 },
+      { "id_raw": 21, "name": "Prosciutto", "uom": "kg", "amount": 2 },
+      { "id_raw": 22, "name": "Lime", "uom": "kg", "amount": 1 },
+      { "id_raw": 23, "name": "Menta", "uom": "kg", "amount": 1 },
+      { "id_raw": 24, "name": "Zucchero", "uom": "kg", "amount": 2 },
+      { "id_raw": 25, "name": "vermouth rosso", "uom": "lt", "amount": 3 },
+      { "id_raw": 26, "name": "Aperol", "uom": "lt", "amount": 3 },
+      { "id_raw": 27, "name": "Cachaça", "uom": "lt", "amount": 3 },
+      { "id_raw": 28, "name": "Triple sec", "uom": "lt", "amount": 1 },
+      { "id_raw": 29, "name": "Caffè decaffeinato in grani", "uom": "kg", "amount": 6 },
+      { "id_raw": 30, "name": "Arancia", "uom": "kg", "amount": 2 },
+      { "id_raw": 31, "name": "Panino", "uom": "pz", "amount": 50 },
+      { "id_raw": 32, "name": "Acqua frizzante 1/2 litro", "uom": "pz", "amount": 60 },
+      { "id_raw": 33, "name": "Campari", "uom": "lt", "amount": 3 },
+      { "id_raw": 34, "name": "Acqua naturale 1,5 litri", "uom": "pz", "amount": 40 },
+      { "id_raw": 35, "name": "Acqua frizzante 1,5 litri", "uom": "pz", "amount": 40 },
+      { "id_raw": 36, "name": "Ormeasco doc", "uom": "lt", "amount": 8 }
+  ],
+
+  "productrecipe": [
+      { "id_prod": 1, "id_raw": 1, "amount": 0.1 },
+      { "id_prod": 2, "id_raw": 1, "amount": 0.1 },
+      { "id_prod": 2, "id_raw": 2, "amount": 0.1 },
+      { "id_prod": 3, "id_raw": 2, "amount": 0.4 },
+      { "id_prod": 4, "id_raw": 3, "amount": 1 },
+      { "id_prod": 5, "id_raw": 4, "amount": 1 },
+      { "id_prod": 6, "id_raw": 5, "amount": 0.05 },
+      { "id_prod": 6, "id_raw": 6, "amount": 0.05 },
+      { "id_prod": 6, "id_raw": 22, "amount": 0.01 },
+      { "id_prod": 7, "id_raw": 26, "amount": 0.05 },
+      { "id_prod": 7, "id_raw": 9, "amount": 0.1 },
+      { "id_prod": 7, "id_raw": 30, "amount": 0.01 },
+      { "id_prod": 7, "id_raw": 32, "amount": 0.1 },
+      { "id_prod": 8, "id_raw": 9, "amount": 0.15 },
+      { "id_prod": 9, "id_raw": 11, "amount": 0.2 },
+      { "id_prod": 10, "id_raw": 11, "amount": 0.4 },
+      { "id_prod": 11, "id_raw": 12, "amount": 1 },
+      { "id_prod": 12, "id_raw": 13, "amount": 1 },
+      { "id_prod": 13, "id_raw": 14, "amount": 0.15 },
+      { "id_prod": 14, "id_raw": 15, "amount": 0.06 },
+      { "id_prod": 15, "id_raw": 16, "amount": 0.06 },
+      { "id_prod": 16, "id_raw": 17, "amount": 0.06 },
+      { "id_prod": 17, "id_raw": 18, "amount": 0.1 },
+      { "id_prod": 18, "id_raw": 19, "amount": 0.05 },
+      { "id_prod": 19, "id_raw": 20, "amount": 0.1 },
+      { "id_prod": 19, "id_raw": 31, "amount": 1 },
+      { "id_prod": 20, "id_raw": 21, "amount": 0.1 },
+      { "id_prod": 20, "id_raw": 31, "amount": 1 },
+      { "id_prod": 21, "id_raw": 5, "amount": 0.015 },
+      { "id_prod": 21, "id_raw": 6, "amount": 0.015 },
+      { "id_prod": 21, "id_raw": 7, "amount": 0.015 },
+      { "id_prod": 21, "id_raw": 8, "amount": 0.015 },
+      { "id_prod": 21, "id_raw": 28, "amount": 0.015 },
+      { "id_prod": 21, "id_raw": 24, "amount": 0.01 },
+      { "id_prod": 21, "id_raw": 22, "amount": 0.01 },
+      { "id_prod": 21, "id_raw": 3, "amount": 0.02 },
+      { "id_prod": 22, "id_raw": 6, "amount": 0.03 },
+      { "id_prod": 22, "id_raw": 23, "amount": 0.01 },
+      { "id_prod": 22, "id_raw": 22, "amount": 0.03 },
+      { "id_prod": 22, "id_raw": 24, "amount": 0.03 },
+      { "id_prod": 22, "id_raw": 32, "amount": 0.02 },
+      { "id_prod": 23, "id_raw": 27, "amount": 0.03 },
+      { "id_prod": 23, "id_raw": 24, "amount": 0.05 },
+      { "id_prod": 23, "id_raw": 22, "amount": 0.015 },
+      { "id_prod": 24, "id_raw": 7, "amount": 0.03 },
+      { "id_prod": 24, "id_raw": 22, "amount": 0.03 },
+      { "id_prod": 24, "id_raw": 24, "amount": 0.03 },
+      { "id_prod": 25, "id_raw": 5, "amount": 0.045 },
+      { "id_prod": 25, "id_raw": 25, "amount": 0.045 },
+      { "id_prod": 25, "id_raw": 33, "amount": 0.045 },
+      { "id_prod": 26, "id_raw": 1, "amount": 0.1 },
+      { "id_prod": 26, "id_raw": 15, "amount": 0.05 },
+      { "id_prod": 27, "id_raw": 1, "amount": 0.1 },
+      { "id_prod": 27, "id_raw": 2, "amount": 0.1 },
+      { "id_prod": 28, "id_raw": 1, "amount": 0.1 },
+      { "id_prod": 29, "id_raw": 29, "amount": 0.1 },
+      { "id_prod": 30, "id_raw": 1, "amount": 0.2 },
+      { "id_prod": 31, "id_raw": 1, "amount": 0.1 },
+      { "id_prod": 32, "id_raw": 1, "amount": 0.1 },
+      { "id_prod": 32, "id_raw": 24, "amount": 0.05 },
+      { "id_prod": 33, "id_raw": 1, "amount": 0.1 },
+      { "id_prod": 33, "id_raw": 15, "amount": 0.1 },
+      { "id_prod": 34, "id_raw": 10, "amount": 1 },
+      { "id_prod": 35, "id_raw": 32, "amount": 1 },
+      { "id_prod": 36, "id_raw": 34, "amount": 1 },
+      { "id_prod": 37, "id_raw": 35, "amount": 1 },
+      { "id_prod": 38, "id_raw": 36, "amount": 0.15 }
+  ]
 }

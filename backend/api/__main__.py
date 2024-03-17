@@ -26,14 +26,14 @@ async def create_category(category: Category, db: Session = Depends(get_session)
 @app.get("/category/{name}")
 async def read_category(name: str, db: Session = Depends(get_session)):
     try:
-        return crud.get_instance(db, name=name, instance=Category)
+        return crud.get_instance(db, parameters={"name": name}, instance=Category)
     except:
         raise HTTPException(status_code=404, detail="Category not found")
 
 @app.get("/categories/")
-async def read_categories(skip: int = 0, limit: int = 10, db: Session = Depends(get_session)):
+async def read_categories(limit: int = 10, db: Session = Depends(get_session)):
     try:
-        return crud.get_instances(db, instance=Category, skip=skip, limit=limit)
+        return crud.get_instances(db, instance=Category, llimit=limit)
     except:
         raise HTTPException(status_code=404, detail="Categories not found")
     
@@ -47,14 +47,14 @@ async def create_supplier(supplier: Supplier, db: Session = Depends(get_session)
 @app.get("/supplier/{id_supplier}")
 async def read_supplier(id_supplier: int, db: Session = Depends(get_session)):
     try:
-        return crud.get_instance(db, name=id_supplier, instance=Supplier)
+        return crud.get_instance(db, parameters={"id_supplier": id_supplier}, instance=Supplier)
     except:
         raise HTTPException(status_code=404, detail="Supplier not found")
     
 @app.get("/suppliers/")
-async def read_suppliers(skip: int = 0, limit: int = 10, db: Session = Depends(get_session)):
+async def read_suppliers(limit: int = 10, db: Session = Depends(get_session)):
     try:
-        return crud.get_instances(db, instance=Supplier, skip=skip, limit=limit)
+        return crud.get_instances(db, instance=Supplier, llimit=limit)
     except:
         raise HTTPException(status_code=404, detail="Suppliers not found")
     
@@ -68,58 +68,58 @@ async def create_product(product: Product, db: Session = Depends(get_session)):
 @app.get("/product/{id_prod}")
 async def read_product(id_prod: int, db: Session = Depends(get_session)):
     try:
-        return crud.get_instance(db, name=id_prod, instance=Product)
+        return crud.get_instance(db, parameters={"id_prod": id_prod}, instance=Product)
     except:
         raise HTTPException(status_code=404, detail="Product not found")
     
 @app.get("/products/")
-async def read_products(skip: int = 0, limit: int = 10, db: Session = Depends(get_session)):
+async def read_products(limit: int = 10, db: Session = Depends(get_session)):
     try:
-        return crud.get_instances(db, instance=Product, skip=skip, limit=limit)
+        return crud.get_instances(db, instance=Product, llimit=limit)
     except:
         raise HTTPException(status_code=404, detail="Products not found")
     
-@app.post("/raw_product/")
-async def create_raw_product(raw_product: RawProduct, db: Session = Depends(get_session)):
+@app.post("/rawproduct/")
+async def create_rawproduct(rawproduct: RawProduct, db: Session = Depends(get_session)):
     try:
-        return crud.create_instance(db=db, instance=raw_product)
+        return crud.create_instance(db=db, instance=rawproduct)
     except:
-        raise HTTPException(status_code=400, detail="Raw Product already exists")
+        raise HTTPException(status_code=400, detail="RawProduct already exists")
     
-@app.get("/raw_product/{id_raw}")
-async def read_raw_product(id_raw: int, db: Session = Depends(get_session)):
+@app.get("/rawproduct/{id_raw}")
+async def read_rawproduct(id_raw: int, db: Session = Depends(get_session)):
     try:
-        return crud.get_instance(db, name=id_raw, instance=RawProduct)
+        return crud.get_instance(db, parameters={"id_raw": id_raw}, instance=RawProduct)
     except:
-        raise HTTPException(status_code=404, detail="Raw Product not found")
-    
-@app.get("/raw_products/")
-async def read_raw_products(skip: int = 0, limit: int = 10, db: Session = Depends(get_session)):
-    try:
-        return crud.get_instances(db, instance=RawProduct, skip=skip, limit=limit)
-    except:
-        raise HTTPException(status_code=404, detail="Raw Products not found")
+        raise HTTPException(status_code=404, detail="RawProduct not found")
 
-@app.post("/product_recipe/")
+@app.get("/rawproducts/")
+async def read_rawproducts(limit: int = 10, db: Session = Depends(get_session)):
+    try:
+        return crud.get_instances(db, instance=RawProduct, llimit=limit)
+    except:
+        raise HTTPException(status_code=404, detail="RawProducts not found")
+    
+@app.post("/productrecipe/")
 async def create_product_recipe(product_recipe: ProductRecipe, db: Session = Depends(get_session)):
     try:
         return crud.create_instance(db=db, instance=product_recipe)
     except:
-        raise HTTPException(status_code=400, detail="Product Recipe already exists")
+        raise HTTPException(status_code=400, detail="ProductRecipe already exists")
     
-@app.get("/product_recipe/{id_prod}/{id_raw}")
+@app.get("/productrecipe/{id_prod}/{id_raw}")
 async def read_product_recipe(id_prod: int, id_raw: int, db: Session = Depends(get_session)):
     try:
-        return crud.get_instance(db, name=id_prod, instance=ProductRecipe)
+        return crud.get_instance(db, parameters={"id_prod": id_prod, "id_raw": id_raw}, instance=ProductRecipe)
     except:
-        raise HTTPException(status_code=404, detail="Product Recipe not found")
+        raise HTTPException(status_code=404, detail="ProductRecipe not found")
     
-@app.get("/product_recipes/")
-async def read_product_recipes(skip: int = 0, limit: int = 10, db: Session = Depends(get_session)):
+@app.get("/productrecipes/")
+async def read_product_recipes(limit: int = 10, db: Session = Depends(get_session)):
     try:
-        return crud.get_instances(db, instance=ProductRecipe, skip=skip, limit=limit)
+        return crud.get_instances(db, instance=ProductRecipe, llimit=limit)
     except:
-        raise HTTPException(status_code=404, detail="Product Recipes not found")
+        raise HTTPException(status_code=404, detail="ProductRecipes not found")
     
 @app.post("/order/")
 async def create_order(order: Order, db: Session = Depends(get_session)):
@@ -131,14 +131,14 @@ async def create_order(order: Order, db: Session = Depends(get_session)):
 @app.get("/order/{billNo}")
 async def read_order(billNo: int, db: Session = Depends(get_session)):
     try:
-        return crud.get_instance(db, name=billNo, instance=Order)
+        return crud.get_instance(db, parameters={"billNo": billNo}, instance=Order)
     except:
         raise HTTPException(status_code=404, detail="Order not found")
     
 @app.get("/orders/")
-async def read_orders(skip: int = 0, limit: int = 10, db: Session = Depends(get_session)):
+async def read_orders(limit: int = 10, db: Session = Depends(get_session)):
     try:
-        return crud.get_instances(db, instance=Order, skip=skip, limit=limit)
+        return crud.get_instances(db, instance=Order, llimit=limit)
     except:
         raise HTTPException(status_code=404, detail="Orders not found")
     
@@ -152,17 +152,39 @@ async def create_transaction(transaction: Transaction, db: Session = Depends(get
 @app.get("/transaction/{id_supplier}/{id_raw}/{date}")
 async def read_transaction(id_supplier: int, id_raw: int, date: str, db: Session = Depends(get_session)):
     try:
-        return crud.get_instance(db, name=id_supplier, instance=Transaction)
+        return crud.get_instance(db, parameters={"id_supplier": id_supplier, "id_raw": id_raw, "date": date}, instance=Transaction)
     except:
         raise HTTPException(status_code=404, detail="Transaction not found")
     
 @app.get("/transactions/")
-async def read_transactions(skip: int = 0, limit: int = 10, db: Session = Depends(get_session)):
+async def read_transactions(limit: int = 10, db: Session = Depends(get_session)):
     try:
-        return crud.get_instances(db, instance=Transaction, skip=skip, limit=limit)
+        return crud.get_instances(db, instance=Transaction, llimit=limit)
     except:
         raise HTTPException(status_code=404, detail="Transactions not found")
 
+@app.delete("/deletetable/{table}")
+async def delete_table(table: str, db: Session = Depends(get_session)):
+    try:
+        match table:
+            case "category":
+                return crud.delete_table(db, Category)
+            case "supplier":
+                return crud.delete_table(db, Supplier)
+            case "product":
+                return crud.delete_table(db, Product)
+            case "rawproduct":
+                return crud.delete_table(db, RawProduct)
+            case "productrecipe":
+                return crud.delete_table(db, ProductRecipe)
+            case "order":
+                return crud.delete_table(db, Order)
+            case "transaction":
+                return crud.delete_table(db, Transaction)
+            case _:
+                raise HTTPException(status_code=404, detail="Table not found")
+    except:
+        raise HTTPException(status_code=404, detail="Table not found")
 
 if __name__ == "__main__":
     import uvicorn
