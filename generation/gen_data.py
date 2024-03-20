@@ -7,15 +7,29 @@ fake = faker.Faker()
 
 from backend.api.schema import Category, Supplier, Product, RawProduct, ProductRecipe, Transaction
 
+
 def read_static_data():
     with open('static_data.json') as f:
         data = json.load(f)
     return data    
+data = read_static_data()
 
-def delete_table(table: str):
-    response = requests.delete(f'{API_URL}/deletetable/{table}')
-    print(response.json())
+def get_data(api: str, params: dict = None):
+    try:
+        response = requests.get(f'{API_URL}/{api}', params=params)
+        return response.json()
+    except Exception as e:
+        print(e)
+        return None
     
+def delete_table(table: str):
+    try:
+        response = requests.delete(f'{API_URL}/deletetable/{table}')
+        return response.json()
+    except Exception as e:
+        print(e)
+        return None
+            
 def delete_all_tables():
     delete_table('productrecipe')
     delete_table('product')
@@ -24,7 +38,7 @@ def delete_all_tables():
     delete_table('rawproduct')
     delete_table('supplier')
 
-def init_table(istance, data, api):
+def init_table(istance, api):
     for item in data[api]:
         try: 
             item = istance(
@@ -35,12 +49,12 @@ def init_table(istance, data, api):
         except Exception as e:
             print(e)
             
-def init_all_table(data):
-    init_table(Category, data, 'category')
-    init_table(Supplier, data, 'supplier')
-    init_table(Product, data, 'product')
-    init_table(RawProduct, data, 'rawproduct')
-    init_table(ProductRecipe, data, 'productrecipe')
+def init_all_table():
+    init_table(Category, 'category')
+    init_table(Supplier, 'supplier')
+    init_table(Product, 'product')
+    init_table(RawProduct, 'rawproduct')
+    init_table(ProductRecipe, 'productrecipe')
     
     
 def generate_data():
@@ -85,10 +99,59 @@ def clients_day(luck):
     
     return int(clients)
 
-def generate_transaction():
-    # Vedere product recipe per ordinare uno stack di 300/400 prodotti a botta
+def find_product_by_raw(raw_id):
+    for recipe in data['productrecipe']:
+        if recipe['id_raw'] == raw_id:
+            return recipe['id_prod']
+
+def get_rate_product(product_id):
+    for product in data['product_rate']:
+        if product['id_prod'] == product_id:
+            return product['rate']
+
+def find_supplier_by_raw(raw_id):
+    for supplier in data['supplier_product']:
+        if raw_id in supplier['sell']:
+            return supplier['id_supplier'] 
     
-    pass
+def isSummer(date):
+    return date.month in [6, 7, 8]
+
+def isWinter(date):
+    return not isSummer(date)
+
+def generate_transaction(date):    
+    STACK = 200
+    warehouse = get_data('rawproducts', params={'limit': 100})
+    
+    for raw in warehouse:
+        id_raw = raw['id_raw']
+        product_id = find_product_by_raw(id_raw)
+        product_rate = get_rate_product(product_id)
+        
+        if isWinter(date):
+            quantity = STACK * product_rate[0]
+        else:
+            quantity = STACK * product_rate[1]
+        
+        get_raw_amount = int(get_data(f'rawproduct/{id_raw}')[0]['amount'])
+        if get_raw_amount < quantity:
+            supplier = find_supplier_by_raw(id_raw)
+            
+            transaction = Transaction(
+                date=date,
+                id_supplier=supplier,
+                id_raw=id_raw,
+                amount=quantity,
+                price=100
+            )
+            
+            try:
+                response = requests.post(f'{API_URL}/transaction/', json=transaction.model_dump())
+                print(response.json())
+            except Exception as e:
+                print(e)
+
 
 def generate_client():
     # A seconda del rate il cliente acquista determiante cose
@@ -103,6 +166,7 @@ def generate_day(date, luck_year):
     
     print(f'Generating data for {date} with luck {luck} and {n_clients} clients')
 
+    generate_transaction(date)
     
     
     # Controlla la quantita del magazzino e se sotto acquista
@@ -112,11 +176,9 @@ def generate_day(date, luck_year):
 
 
 
-def main():
-    data = read_static_data()
-    
+def main():    
     delete_all_tables()
-    init_all_table(data)
+    init_all_table()
     
     generate_data()
     

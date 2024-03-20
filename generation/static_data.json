@@ -7,8 +7,7 @@
     { "id_prod": 4, "rate": [0.5, 0.9] },
     { "id_prod": 5, "rate": [0.1, 0.3] },
     { "id_prod": 6, "rate": [0.7, 0.8] },
-    { "id_prod": 7, "rate": [0.6, 1.0] },
-    { "id_prod": 8, "rate": [0.7, 0.7] },
+     { "id_prod": 8, "rate": [0.7, 0.7] },
     { "id_prod": 9, "rate": [0.4, 0.6] },
     { "id_prod": 10, "rate": [0.5, 0.7] },
     { "id_prod": 11, "rate": [0.3, 0.5] },
@@ -115,9 +114,9 @@
   ],
 
   "rawproduct" : [
-      { "id_raw": 1, "name": "Caffè in grani", "uom": "kg", "amount": 10 },
-      { "id_raw": 2, "name": "Latte", "uom": "lt", "amount": 15 },
-      { "id_raw": 3, "name": "Coca cola", "uom": "pz", "amount": 40 },
+      { "id_raw": 1, "name": "Caffè in grani", "uom": "kg", "amount": 3 },
+      { "id_raw": 2, "name": "Latte", "uom": "lt", "amount": 10 },
+      { "id_raw": 3, "name": "Coca cola", "uom": "pz", "amount": 50 },
       { "id_raw": 4, "name": "Fanta", "uom": "pz", "amount": 25 },
       { "id_raw": 5, "name": "Gin", "uom": "lt", "amount": 3 },
       { "id_raw": 6, "name": "Rum", "uom": "lt", "amount": 2 },
