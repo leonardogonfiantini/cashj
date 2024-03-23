@@ -1,4 +1,6 @@
 import json, requests, os, sys, random, datetime, faker, holidays, dotenv
+import asyncio
+
 dotenv.load_dotenv()
 API_URL = os.getenv('API_URL')
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -6,7 +8,6 @@ sys.path.append(os.path.dirname(SCRIPT_DIR))
 fake = faker.Faker()
 
 from backend.api.schema import Category, Supplier, Product, RawProduct, ProductRecipe, Transaction
-
 
 def read_static_data():
     with open('static_data.json') as f:
@@ -34,9 +35,11 @@ def delete_all_tables():
     delete_table('productrecipe')
     delete_table('product')
     delete_table('category')
-    
+
+    delete_table('transaction')    
     delete_table('rawproduct')
     delete_table('supplier')
+    
 
 def init_table(istance, api):
     for item in data[api]:
@@ -58,12 +61,15 @@ def init_all_table():
     
     
 def generate_data():
-    years = [2019, 2020, 2021, 2022, 2023, 2024]
+    global inflation
+    inflation = 0
+    years = [2019, 2020]
     luck = [0.7, 0.2, 0.3, 0.6, 0.5, 0.7]
     
     for year, luck_year in zip(years, luck):
+        print(f'Generating data for year {year}')
+        inflation += 0.1
         generate_year(year, luck_year)
-        
         
 def generate_year(year, luck_year):
 
@@ -99,10 +105,12 @@ def clients_day(luck):
     
     return int(clients)
 
-def find_product_by_raw(raw_id):
+def find_products_by_raw(raw_id):
+    products = []
     for recipe in data['productrecipe']:
         if recipe['id_raw'] == raw_id:
-            return recipe['id_prod']
+            products.append(recipe['id_prod'])
+    return products
 
 def get_rate_product(product_id):
     for product in data['product_rate']:
@@ -111,9 +119,21 @@ def get_rate_product(product_id):
 
 def find_supplier_by_raw(raw_id):
     for supplier in data['supplier_product']:
-        if raw_id in supplier['sell']:
-            return supplier['id_supplier'] 
-    
+        for raw in supplier['sell']:
+            if raw_id == raw[0]:
+                return supplier['id_supplier']
+
+def find_price_by_raw(raw_id):
+    for supplier in data['supplier_product']:
+        for raw in supplier['sell']:
+            if raw_id == raw[0]:
+                return raw[1]  
+            
+def get_raw_needed(product_id, raw_id):
+    for recipe in data['productrecipe']:
+        if recipe['id_prod'] == product_id and recipe['id_raw'] == raw_id:
+            return recipe['amount']
+
 def isSummer(date):
     return date.month in [6, 7, 8]
 
@@ -121,65 +141,96 @@ def isWinter(date):
     return not isSummer(date)
 
 def generate_transaction(date):    
-    STACK = 200
+    STACK = 160
     warehouse = get_data('rawproducts', params={'limit': 100})
     
     for raw in warehouse:
         id_raw = raw['id_raw']
-        product_id = find_product_by_raw(id_raw)
-        product_rate = get_rate_product(product_id)
+        products_id = find_products_by_raw(id_raw)
         
-        if isWinter(date):
-            quantity = STACK * product_rate[0]
-        else:
-            quantity = STACK * product_rate[1]
+        abs_quantity = 0
+        for id in products_id:
+            product_rate = get_rate_product(id)
+            raw_needed = get_raw_needed(id, id_raw)
+            if isWinter(date):
+                abs_quantity += STACK * raw_needed * product_rate[0]
+            else:
+                abs_quantity += STACK * raw_needed * product_rate[1]
         
-        get_raw_amount = int(get_data(f'rawproduct/{id_raw}')[0]['amount'])
-        if get_raw_amount < quantity:
+        get_raw_amount = raw['amount']    
+        
+        if get_raw_amount < abs_quantity:
             supplier = find_supplier_by_raw(id_raw)
             
+            needed_raw = round((abs_quantity - get_raw_amount) * random.uniform(0.8, 1.2) + 1, 2)
+            price = round(find_price_by_raw(id_raw) * (inflation + random.uniform(0.8, 1.2) * needed_raw), 2)
+            
             transaction = Transaction(
-                date=date,
+                date=date.strftime('%Y-%m-%d'),
                 id_supplier=supplier,
                 id_raw=id_raw,
-                amount=quantity,
-                price=100
+                amount=needed_raw,
+                price=price
             )
-            
+        
             try:
                 response = requests.post(f'{API_URL}/transaction/', json=transaction.model_dump())
-                print(response.json())
             except Exception as e:
                 print(e)
 
+def create_group(max):
+    n = random.choices(  
+            range(1, 11),
+                    # 1,   2,  3,  4, 5, 6, 7, 8,  9,  10
+            weights= [10, 30, 26, 16, 8, 4, 3, 2, 0.5, 0.5], 
+            k=1
+        )[0]
 
-def generate_client():
+    return n if n < max else max
+
+def is_product_available(product_id, warehouse):
+    for recipe in data['productrecipe']:
+        if recipe['id_prod'] == product_id:
+            raw_id = recipe['id_raw']
+            raw_needed = recipe['amount']
+            for raw in warehouse:
+                if raw['id_raw'] == raw_id and raw['amount'] < raw_needed:
+                    return False
+    return True
+
+def update_warehouse(raw_id, amount, warehouse):
+    for raw in warehouse:
+        if raw['id_raw'] == raw_id:
+            raw['amount'] -= amount
+            break
+
+def generate_orders(n_clients):
     # A seconda del rate il cliente acquista determiante cose
+    warehouse = get_data('rawproducts', params={'limit': 100})
     
-    pass
+    while n_clients > 0:
+        group = create_group(n_clients)
+        n_clients -= group
+        
+        
+        
+        
+        
     
 def generate_day(date, luck_year):
     
-    luck = luck_day(date, luck_year)
-    
+    luck = luck_day(date, luck_year)    
     n_clients = clients_day(luck)
     
-    print(f'Generating data for {date} with luck {luck} and {n_clients} clients')
-
     generate_transaction(date)
     
-    
-    # Controlla la quantita del magazzino e se sotto acquista
-    # Aggiorna il magazzino
-    # Genera i clienti e i loro acquisit
-    pass
-
+    print(f"Date: {date} - Luck: {luck} - Clients: {n_clients} - Inflation: {inflation}")
+    generate_orders(n_clients)
 
 
 def main():    
     delete_all_tables()
     init_all_table()
-    
     generate_data()
     
 if __name__ == '__main__':

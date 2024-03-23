@@ -1,4 +1,5 @@
-from sqlmodel import Session, SQLModel, select, delete
+from sqlmodel import Session, SQLModel, select, delete, update
+from schema import RawProduct
 
 def create_instance(db: Session, instance: SQLModel):
     db.add(instance)
@@ -25,3 +26,17 @@ def delete_table(db: Session, table: SQLModel):
     db.commit()
     
     return result.rowcount
+
+def update_raw_amount(db: Session, id_raw: int, amount: int):
+    
+    statement = select(RawProduct).where(RawProduct.id_raw == id_raw)
+    result = db.exec(statement)
+    raw = result.one()
+    raw.amount = round(raw.amount + amount, 2)
+    
+    statement = update(RawProduct).where(RawProduct.id_raw == id_raw).values(amount=raw.amount)
+    result = db.exec(statement)
+    
+    db.commit()
+    db.refresh(raw)
+    return raw.amount
