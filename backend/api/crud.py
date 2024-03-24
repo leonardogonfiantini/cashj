@@ -1,5 +1,5 @@
 from sqlmodel import Session, SQLModel, select, delete, update
-from schema import RawProduct
+from schema import RawProduct, ProductRecipe
 
 def create_instance(db: Session, instance: SQLModel):
     db.add(instance)
@@ -40,3 +40,8 @@ def update_raw_amount(db: Session, id_raw: int, amount: int):
     db.commit()
     db.refresh(raw)
     return raw.amount
+
+def get_raws_of_recipe_by_product(db: Session, id_prod: int):
+    statement = select(ProductRecipe).where(ProductRecipe.id_prod == id_prod)
+    result = db.exec(statement)
+    return result.all()

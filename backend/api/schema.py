@@ -52,6 +52,7 @@ class Order(SQLModel, table=True):
     table: str
     discount: Optional[float] = None
     price: float
+    n_client: int
     order_details: dict = Field(default={}, sa_column=Column(JSON))
 
     class Config:

@@ -1,5 +1,4 @@
 import json, requests, os, sys, random, datetime, faker, holidays, dotenv
-import asyncio
 
 dotenv.load_dotenv()
 API_URL = os.getenv('API_URL')
@@ -7,7 +6,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 fake = faker.Faker()
 
-from backend.api.schema import Category, Supplier, Product, RawProduct, ProductRecipe, Transaction
+from backend.api.schema import Category, Supplier, Product, RawProduct, ProductRecipe, Transaction, Order
 
 def read_static_data():
     with open('static_data.json') as f:
@@ -35,7 +34,7 @@ def delete_all_tables():
     delete_table('productrecipe')
     delete_table('product')
     delete_table('category')
-
+    delete_table('order')
     delete_table('transaction')    
     delete_table('rawproduct')
     delete_table('supplier')
@@ -203,19 +202,107 @@ def update_warehouse(raw_id, amount, warehouse):
         if raw['id_raw'] == raw_id:
             raw['amount'] -= amount
             break
+        
+def get_random_product_by_rate(date):
+    products = data['product_rate']
+    if isSummer(date):
+        weights = [product['rate'][1] for product in products]
+    else: 
+        weights = [product['rate'][0] for product in products]
+    
+    product = random.choices(
+        products,
+        weights=weights,
+        k=1
+    )[0]
+    
+    return product['id_prod']
 
-def generate_orders(n_clients):
+def get_product_price(product_id, type):
+    for product in data['product']:
+        if product['id_prod'] == product_id:
+            return product[type]
+
+def generate_table():
+    table = random.choices(  
+            range(1, 11),
+            weights= [8, 8, 8, 8, 8, 8, 8, 8, 8, 28], 
+            k=1
+        )[0]
+    if table==10:
+        return 'banco'
+    else:
+        return 'tavolo -' + str(table)
+    
+def generate_discount(price):
+    
+    if random.random() > 0.1:
+        return 0
+    
+    cut_price = 0
+    if price > 60:
+        cut_price = price % 10
+    elif price > 30:
+        cut_price = price % 8
+    elif price > 10:
+        cut_price = price % 3
+        
+    return cut_price
+
+def generate_price(table, list_products):
+
+    overall_price = 0
+    for product_id, quantity in list_products.items():
+        if table == 'banco':
+            price_u = get_product_price(product_id, 'price_u_retail')
+        else:
+            price_u = get_product_price(product_id, 'price_u_table')
+
+        overall_price += price_u * quantity
+        
+    discount = generate_discount(overall_price)
+    
+    overall_price -= discount
+    
+    return discount, overall_price
+    
+def generate_orders(n_clients, date):
     # A seconda del rate il cliente acquista determiante cose
     warehouse = get_data('rawproducts', params={'limit': 100})
     
     while n_clients > 0:
         group = create_group(n_clients)
         n_clients -= group
+                
+        list_products = {}
+        for _ in range(group):
+            for _ in range(random.randint(1, 3)):
+                product_id = get_random_product_by_rate(date)
+                if is_product_available(product_id, warehouse):
+                    if product_id in list_products:
+                        list_products[product_id] += 1
+                    else:
+                        list_products[product_id] = 1
+                    update_warehouse(product_id, 1, warehouse)
         
+        table = generate_table()
+        discount, price = generate_price(table, list_products)
         
+        order = Order(
+            date=date.strftime('%Y-%m-%d'),
+            billNo=fake.ean(length=13),
+            table=table,
+            discount=discount,
+            price=price,
+            n_clients=group,
+            order_details=list_products
+        )
         
-        
-        
+        try:
+            response = requests.post(f'{API_URL}/order/', json=order.model_dump())
+            print(response.json())
+        except Exception as e:
+            print(e)
     
 def generate_day(date, luck_year):
     
@@ -225,7 +312,7 @@ def generate_day(date, luck_year):
     generate_transaction(date)
     
     print(f"Date: {date} - Luck: {luck} - Clients: {n_clients} - Inflation: {inflation}")
-    generate_orders(n_clients)
+    generate_orders(n_clients, date)
 
 
 def main():    

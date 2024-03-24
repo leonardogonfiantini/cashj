@@ -124,7 +124,20 @@ def read_product_recipes(limit: int = 10, db: Session = Depends(get_session)):
 @app.post("/order/")
 def create_order(order: Order, db: Session = Depends(get_session)):
     try:
-        return crud.create_instance(db=db, instance=order)    
+        crud.create_instance(db=db, instance=order)   
+        for key, value in order.order_details.items():
+            recipe = crud.get_raws_of_recipe_by_product(db, key)
+            
+            #check if raw product is enough
+            for r in recipe:
+                raw = crud.get_instance(db, parameters={"id_raw": r.id_raw}, instance=RawProduct)
+                if raw.amount < r.amount * value:
+                    raise HTTPException(status_code=400, detail="RawProduct not enough")
+                
+            #update raw product amount
+            for r in recipe:
+                crud.update_raw_amount(db=db, id_raw=r.id_raw, amount=-r.amount * value)
+            
     except:
         raise HTTPException(status_code=400, detail="Order already exists")
     
