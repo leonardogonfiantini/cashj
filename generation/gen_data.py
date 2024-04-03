@@ -47,7 +47,6 @@ def init_table(istance, api):
                 **item
             )
             response = requests.post(f'{API_URL}/{api}/', json=item.model_dump())
-            print(response.json())
         except Exception as e:
             print(e)
             
@@ -232,7 +231,7 @@ def generate_table():
     if table==10:
         return 'banco'
     else:
-        return 'tavolo -' + str(table)
+        return 'tavolo - ' + str(table)
     
 def generate_discount(price):
     
@@ -285,23 +284,28 @@ def generate_orders(n_clients, date):
                         list_products[product_id] = 1
                     update_warehouse(product_id, 1, warehouse)
         
+        if list_products == {}:
+            continue
+        
         table = generate_table()
         discount, price = generate_price(table, list_products)
         
+
         order = Order(
             date=date.strftime('%Y-%m-%d'),
-            billNo=fake.ean(length=13),
+            billNo=fake.ean(length=8),
             table=table,
             discount=discount,
             price=price,
-            n_clients=group,
+            n_client=group,
             order_details=list_products
         )
         
         try:
             response = requests.post(f'{API_URL}/order/', json=order.model_dump())
-            print(response.json())
+            response.raise_for_status()
         except Exception as e:
+            print(order.model_dump())
             print(e)
     
 def generate_day(date, luck_year):

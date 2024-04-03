@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from sqlmodel import Session, SQLModel
 from database import engine
 
@@ -11,6 +12,16 @@ def get_session():
     
 app = FastAPI()
 SQLModel.metadata.create_all(engine)
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def read_root():
@@ -125,21 +136,21 @@ def read_product_recipes(limit: int = 10, db: Session = Depends(get_session)):
 def create_order(order: Order, db: Session = Depends(get_session)):
     try:
         crud.create_instance(db=db, instance=order)   
-        for key, value in order.order_details.items():
+        for key, value in order.order_details.items():            
             recipe = crud.get_raws_of_recipe_by_product(db, key)
-            
-            #check if raw product is enough
+                        
+            # check if raw product is enough
             for r in recipe:
-                raw = crud.get_instance(db, parameters={"id_raw": r.id_raw}, instance=RawProduct)
-                if raw.amount < r.amount * value:
+                raw = crud.get_instance(db, parameters={"id_raw": r.id_raw}, instance=RawProduct)[0]
+                if raw.amount < (r.amount * value):
                     raise HTTPException(status_code=400, detail="RawProduct not enough")
-                
-            #update raw product amount
+                                                        
+            # update raw product amount
             for r in recipe:
                 crud.update_raw_amount(db=db, id_raw=r.id_raw, amount=-r.amount * value)
             
-    except:
-        raise HTTPException(status_code=400, detail="Order already exists")
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
     
 @app.get("/order/{billNo}")
 def read_order(billNo: int, db: Session = Depends(get_session)):
