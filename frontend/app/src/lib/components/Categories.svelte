@@ -1,8 +1,8 @@
 <script>
 
-    import {PUBLIC_IP_BACKEND} from "$env/static/public" 
+    import { PUBLIC_IP_BACKEND } from "$env/static/public" 
     import { onMount } from "svelte";
-    
+    import { show_status } from "$lib/store";
 
     let categories = [{name: "loading...", color: "black"}];
     let colors = ["orange", "red", "yellow", "green", "pink", "violet", "aqua"]
@@ -19,6 +19,18 @@
 
     onMount(() => {
         fetch_categories()
+
+        let categories_element = document.getElementsByClassName("categories")
+        for (let category of categories_element) {
+            category.addEventListener("click", () => {
+                show_status.update(value => {
+                    value.tables = false;
+                    value.categories = false;
+                    value.products = true;
+                    return value;
+                })
+            })
+        }
     })
 
 </script>

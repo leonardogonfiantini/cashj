@@ -3,11 +3,32 @@
     import Tables from "./Tables.svelte";
     import Categories from "./Categories.svelte";
     import Products from "./Products.svelte";
+
+    import { get_show_status, show_status } from "$lib/store"
+
+    let status = get_show_status();
+    show_status.subscribe((value) => {
+        status = value;
+    })
+
+
 </script>
 
 
 <div class="selection">
-    <Products category="Caffetteria" />
+
+    {#if status.tables}
+        <Tables />
+    {/if}
+
+    {#if status.categories}
+        <Categories />
+    {/if}
+
+    {#if status.products}
+        <Products />
+    {/if}
+    
 </div>
 
 

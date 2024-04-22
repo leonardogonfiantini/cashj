@@ -1,7 +1,8 @@
 <script>
 
-    import {PUBLIC_IP_BACKEND} from "$env/static/public" 
+    import { PUBLIC_IP_BACKEND } from "$env/static/public" 
     import { onMount } from "svelte";
+    import { show_status } from "$lib/store";
     
     export let category = "Caffetteria";
     
@@ -13,17 +14,27 @@
             .then(response => response.json())
             .then(data => {
                 products = data;
-                console.log(products)
                 products = products.filter(product => product.category_name === category)
                 for (let i = 0; i < products.length; i++) {
                     products[i].color = colors[i % colors.length]
                 }
             })
-
     }
 
     onMount(() => {
         fetch_product_by_category()
+
+        let products_element = document.getElementsByClassName("products")
+        for (let product of products_element) {
+            product.addEventListener("click", () => {
+                show_status.update(value => {
+                    value.tables = false;
+                    value.products = false;
+                    value.categories = true;
+                    return value;
+                })
+            })
+        }
     })
 
 </script>

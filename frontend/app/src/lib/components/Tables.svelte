@@ -1,10 +1,26 @@
 <script>
+    import { onMount } from "svelte";
+    import { show_status } from "$lib/store";
 
     const tables = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const table_name = "tavolo-"
     const banco_name = "banco"
 
     const colors = ["orange", "red"]
+
+    onMount(() => {
+        let tables_element = document.getElementsByClassName("choice")
+        for (let table of tables_element) {
+            table.addEventListener("click", () => {
+                show_status.update(value => {
+                    value.tables = false;
+                    value.categories = true;
+                    value.products = false;
+                    return value;
+                })
+            })
+        }
+    })
 
 </script>
 
