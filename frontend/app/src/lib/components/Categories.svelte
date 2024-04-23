@@ -2,33 +2,39 @@
 
     import { PUBLIC_IP_BACKEND } from "$env/static/public" 
     import { onMount } from "svelte";
-    import { show_status } from "$lib/store";
+    import { show_status, colors, category_selected } from "$lib/store";
 
-    let categories = [{name: "loading...", color: "black"}];
-    let colors = ["orange", "red", "yellow", "green", "pink", "violet", "aqua"]
+    let categories = [{name: "loading...", color: "white"}];
     
     async function fetch_categories() {
         const response = await fetch(`${PUBLIC_IP_BACKEND}/categories`);
         const data = await response.json();
         categories = data;
         for (let i = 0; i < categories.length; i++) {
-            categories[i].color = colors[i % colors.length]
+            categories[i].color = colors[categories[i].name]
         }
 
     }
 
-    onMount(() => {
-        fetch_categories()
+    onMount(async () => {
+        await fetch_categories()
 
-        let categories_element = document.getElementsByClassName("categories")
+        let categories_element = document.getElementsByClassName("choice")
         for (let category of categories_element) {
             category.addEventListener("click", () => {
+                
                 show_status.update(value => {
                     value.tables = false;
                     value.categories = false;
                     value.products = true;
                     return value;
                 })
+
+                category_selected.update(value => {
+                    value = category.id;
+                    return value;
+                })
+
             })
         }
     })
@@ -38,7 +44,7 @@
 <div class="categories">
 
     {#each categories as category}
-        <div class="choice" style={`background-color:${category.color}`}>
+        <div class="choice" id={category.name} style={`background-color:${category.color}`}>
             {category.name}
         </div>
     {/each}

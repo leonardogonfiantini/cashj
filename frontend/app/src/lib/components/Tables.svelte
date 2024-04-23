@@ -1,12 +1,13 @@
 <script>
     import { onMount } from "svelte";
     import { show_status } from "$lib/store";
+    import { table_selected } from "$lib/store";
 
     const tables = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     const table_name = "tavolo-"
     const banco_name = "banco"
 
-    const colors = ["orange", "red"]
+    const colors = ["khaki", "salmon"]
 
     onMount(() => {
         let tables_element = document.getElementsByClassName("choice")
@@ -18,6 +19,11 @@
                     value.products = false;
                     return value;
                 })
+
+                table_selected.update(value => {
+                    value = table.id;
+                    return value;
+                })
             })
         }
     })
@@ -27,12 +33,12 @@
 <div class="tables">
 
     {#each tables as table}
-        <div class="choice" style={`background-color: ${colors[0]}`}>
+        <div id="Table {table}" class="choice" style={`background-color: ${colors[0]}`}>
             {table_name + table}
         </div>
     {/each}
 
-    <div class="choice" style={`background-color: ${colors[1]}`}>
+    <div id="Banco" class="choice" style={`background-color: ${colors[1]}`}>
         {banco_name}
     </div>
 

@@ -3,28 +3,30 @@
     import { PUBLIC_IP_BACKEND } from "$env/static/public" 
     import { onMount } from "svelte";
     import { show_status } from "$lib/store";
+    import { colors } from "$lib/store.js";
     
     export let category = "Caffetteria";
     
-    let products = [{name: "loading...", color: "black", category_name: "loading..."}];
-    let colors = ["orange", "red", "yellow", "green", "pink", "violet", "aqua"]
+    let products = [{name: "loading...", color: "white", category_name: "loading..."}];
 
-    function fetch_product_by_category() {
-        fetch(`${PUBLIC_IP_BACKEND}/products?limit=100`)
-            .then(response => response.json())
-            .then(data => {
-                products = data;
-                products = products.filter(product => product.category_name === category)
-                for (let i = 0; i < products.length; i++) {
-                    products[i].color = colors[i % colors.length]
-                }
-            })
+    async function fetch_product_by_category() {
+        const response = await fetch(`${PUBLIC_IP_BACKEND}/products?limit=100`);
+        const data = await response.json();
+        products = data;
+        
+        products = products.filter(product => product.category_name === category)
+
+        products.map(product => {
+            product.color = colors[product.category_name]
+        })
+
+        console.log(products)
     }
 
-    onMount(() => {
-        fetch_product_by_category()
+    onMount(async () => {
+        await fetch_product_by_category()
 
-        let products_element = document.getElementsByClassName("products")
+        let products_element = document.getElementsByClassName("choice")
         for (let product of products_element) {
             product.addEventListener("click", () => {
                 show_status.update(value => {

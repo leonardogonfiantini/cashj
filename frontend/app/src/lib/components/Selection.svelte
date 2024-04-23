@@ -4,11 +4,16 @@
     import Categories from "./Categories.svelte";
     import Products from "./Products.svelte";
 
-    import { get_show_status, show_status } from "$lib/store"
+    import { get_show_status, show_status, category_selected } from "$lib/store"
 
     let status = get_show_status();
     show_status.subscribe((value) => {
         status = value;
+    })
+
+    let category = "Caffetteria"
+    category_selected.subscribe((value) => {
+        category = value;
     })
 
 
@@ -26,7 +31,7 @@
     {/if}
 
     {#if status.products}
-        <Products />
+        <Products category={category} />
     {/if}
     
 </div>
