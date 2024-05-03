@@ -1,6 +1,5 @@
 <script>
 
-    import { onMount } from "svelte";
     import { products_list, table_selected } from "$lib/store";
     import Time from "$lib/components/Time.svelte";
 
@@ -19,7 +18,6 @@
 
     /** @type {Product[]} */
     let p_list = [];
-
     products_list.subscribe(value => {    
         if (value.length === 0) {
             return;
@@ -44,7 +42,13 @@
     </section>
 
     <section class="content">
-        <h1>Conteggio</h1>
+        {#each p_list as product}
+            <div class="product">
+                <h1>{product.name}</h1>
+                <h1>{product.price}€</h1>
+                <h1>{product.quantity}</h1>
+            </div>
+        {/each}
     </section>        
 
 </div>
@@ -100,7 +104,33 @@
     }
 
     .content {
+        display: block;
+        align-items: center;
+        justify-content: center;
+        overflow: scroll;
+        height: 70vh;
+    }
+
+    .product {
+        display: flex;
+        align-items: center;
         padding: 1rem;
+        border-radius: 15px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+        margin: 1rem;
+    }
+
+    .product :nth-child(1) {
+        width: 50%;
+    }
+
+    .product :nth-child(2) {
+        width: 25%;
+    }
+
+    .product :nth-child(3) {
+        width: 25%;
     }
 
 

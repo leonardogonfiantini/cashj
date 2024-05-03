@@ -5,6 +5,7 @@ export let show_status = writable({
     tables: true,
     categories: false,
     products: false,
+    ordina: false,
 });
 export let get_show_status = () => get(show_status)
 
@@ -15,7 +16,7 @@ export let get_products_list = () => get(products_list)
 export let category_selected = writable("Caffetteria");
 
 export let table_selected = writable("Selezionare un tavolo");
-
+export let get_table_selected = () => get(table_selected)
 
 /**
 * @type {Object.<string, string>}

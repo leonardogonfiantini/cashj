@@ -3,6 +3,7 @@
     import Tables from "./Tables.svelte";
     import Categories from "./Categories.svelte";
     import Products from "./Products.svelte";
+    import Ordina from "./Ordina.svelte";
 
     import { get_show_status, show_status, category_selected } from "$lib/store"
 
@@ -32,6 +33,10 @@
 
     {#if status.products}
         <Products category={category} />
+    {/if}
+
+    {#if status.ordina}
+        <Ordina />
     {/if}
     
 </div>

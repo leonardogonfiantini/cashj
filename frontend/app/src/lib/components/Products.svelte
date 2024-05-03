@@ -2,12 +2,12 @@
 
     import { PUBLIC_IP_BACKEND } from "$env/static/public" 
     import { onMount } from "svelte";
-    import { show_status } from "$lib/store";
+    import { show_status, products_list, get_table_selected } from "$lib/store";
     import { colors } from "$lib/store.js";
     
     export let category = "Caffetteria";
     
-    let products = [{name: "loading...", color: "white", category_name: "loading..."}];
+    let products = [{name: "loading...", price_u_retail: 0, price_u_table: 0, color: "white", category_name: "loading..."}];
 
     async function fetch_product_by_category() {
         const response = await fetch(`${PUBLIC_IP_BACKEND}/products?limit=100`);
@@ -15,12 +15,11 @@
         products = data;
         
         products = products.filter(product => product.category_name === category)
-
+    
         products.map(product => {
             product.color = colors[product.category_name]
         })
 
-        console.log(products)
     }
 
     onMount(async () => {
@@ -35,22 +34,57 @@
                     value.categories = true;
                     return value;
                 })
+
+                products_list.update(value => {
+                    let p_list = value;
+
+                    if (p_list.length === 0) {
+                        p_list = [
+                            {
+                                name: product.textContent.trim(),
+                                price: get_table_selected() == "Banco" ? parseFloat(product.getAttribute("data-price_u_retail")) : parseFloat(product.getAttribute("data-price_u_table")),
+                                quantity: 1
+                            }
+                        ]
+                        return p_list;
+                    }
+
+                    let found = false;
+                    for (let i = 0; i < p_list.length; i++) {
+                        if (p_list[i].name === product.textContent.trim()) {
+                            p_list[i].quantity += 1;
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        p_list.push({
+                            name: product.textContent.trim(),
+                            price: get_table_selected() == "Banco" ? parseFloat(product.getAttribute("data-price_u_retail")) : parseFloat(product.getAttribute("data-price_u_table")),
+                            quantity: 1
+                        })
+                    }
+
+                    return p_list;
+
+                })
             })
         }
     })
 
 </script>
 
-
 <div class="products">
 
     {#each products as product}
-        <div class="choice" style={`background-color:${product.color}`}>
+        <div class="choice" style={`background-color:${product.color}`} data-price_u_retail={product.price_u_retail} data-price_u_table={product.price_u_table}>
             {product.name}
         </div>
     {/each}
 
 </div>
+
 
 <style>
     

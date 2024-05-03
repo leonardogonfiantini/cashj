@@ -1,6 +1,6 @@
 <script>
     import Conteggio from '$lib/components/Conteggio.svelte';
-    import Ordina from '$lib/components/Ordina.svelte';
+    import Totale from '$lib/components/Totale.svelte';
     import Selection from '$lib/components/Selection.svelte';
 </script>
 
@@ -8,7 +8,7 @@
 
     <div class="left-side">
         <Conteggio />
-        <Ordina />
+        <Totale />
     </div>
     
     <div class="right-side">
