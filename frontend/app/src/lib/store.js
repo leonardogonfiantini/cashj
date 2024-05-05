@@ -2,10 +2,10 @@ import { get, writable } from "svelte/store";
 
 
 export let show_status = writable({
-    tables: true,
+    tables: false,
     categories: false,
     products: false,
-    ordina: false,
+    ordina: true,
 });
 export let get_show_status = () => get(show_status)
 

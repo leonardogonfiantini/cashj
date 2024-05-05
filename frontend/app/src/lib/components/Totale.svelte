@@ -31,8 +31,8 @@
 </script>
 
 
-<button class="ordina" on:click={ordina}>
-    <p> TOT: € 0.0 </p>
+<button class="totale" on:click={ordina}>
+    <p> TOT: € 0.00 </p>
 
     <div class="freccetta">
         &#x2192; 
@@ -43,7 +43,7 @@
 
 <style>
 
-    .ordina {
+    .totale {
 
         position: relative;
         width: 80%;
@@ -66,7 +66,7 @@
         border: 0;
     }
 
-    .ordina p {
+    .totale p {
         margin: 0;
         padding: 0;
         width: 80%;
