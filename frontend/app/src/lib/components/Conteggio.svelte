@@ -20,7 +20,7 @@
     let p_list = [];
     products_list.subscribe(value => {    
         if (value.length === 0) {
-            return;
+            return [];
         }
         p_list = value;
     })

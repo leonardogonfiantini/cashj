@@ -7,7 +7,7 @@
     
     export let category = "Caffetteria";
     
-    let products = [{name: "loading...", price_u_retail: 0, price_u_table: 0, color: "white", category_name: "loading..."}];
+    let products = [{name: "loading...", price_u_retail: 0, price_u_table: 0, color: "white", category_name: "loading...", id: 0}];
 
     async function fetch_product_by_category() {
         const response = await fetch(`${PUBLIC_IP_BACKEND}/products?limit=100`);
@@ -43,7 +43,8 @@
                             {
                                 name: product.textContent.trim(),
                                 price: get_table_selected() == "Banco" ? parseFloat(product.getAttribute("data-price_u_retail")) : parseFloat(product.getAttribute("data-price_u_table")),
-                                quantity: 1
+                                quantity: 1,
+                                id: product.getAttribute("data-id")
                             }
                         ]
                         return p_list;
@@ -62,7 +63,8 @@
                         p_list.push({
                             name: product.textContent.trim(),
                             price: get_table_selected() == "Banco" ? parseFloat(product.getAttribute("data-price_u_retail")) : parseFloat(product.getAttribute("data-price_u_table")),
-                            quantity: 1
+                            quantity: 1,
+                            id: product.getAttribute("data-id")
                         })
                     }
 
@@ -78,7 +80,7 @@
 <div class="products">
 
     {#each products as product}
-        <div class="choice" style={`background-color:${product.color}`} data-price_u_retail={product.price_u_retail} data-price_u_table={product.price_u_table}>
+        <div class="choice" style={`background-color:${product.color}`} data-price_u_retail={product.price_u_retail} data-price_u_table={product.price_u_table} data-id={product.id_prod}>
             {product.name}
         </div>
     {/each}

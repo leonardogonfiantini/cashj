@@ -15,6 +15,8 @@
         totale += product.price * product.quantity;
     }
 
+    totale = totale.toFixed(2);
+
     onMount(() => {
         
         // on hover tooltip  for clients, discount, totale, totale-sconto

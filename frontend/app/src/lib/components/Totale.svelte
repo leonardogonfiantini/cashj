@@ -1,7 +1,8 @@
 <script>
 
-    import { products_list, show_status } from "$lib/store.js";
-
+    import { products_list, show_status, table_selected, get_show_status, get_table_selected, get_products_list } from "$lib/store.js";
+    import { PUBLIC_IP_BACKEND } from "$env/static/public"
+    import Time from "./Time.svelte";
 
     products_list.subscribe(value => {
 
@@ -9,7 +10,7 @@
             return;
         }
 
-        let ordina = document.getElementsByClassName('ordina')[0].querySelector('p');
+        let ordina = document.getElementsByClassName('totale')[0].querySelector('p');
         let tot = 0;
         for (let product of value) {
             tot += product.price * product.quantity;
@@ -18,6 +19,58 @@
     })
 
     function ordina() {
+
+        let show_status_t = get_show_status();
+        if (show_status_t.ordina) {
+
+            let p_list_temp = get_products_list();
+            let p_list = {}
+            for (let product of p_list_temp) {
+                p_list[product.id] = product.quantity;
+            }
+
+            let body = {
+                "billNo": Math.floor(Math.random() * 1000000000),
+                "date": new Date().toISOString().slice(0, 10),
+                "table": get_table_selected(),
+                "discount": parseInt(document.querySelector('.discount .counter p').textContent),
+                "price": parseFloat(document.querySelector('.totale-sconto p').textContent),
+                "n_client": parseInt(document.querySelector('.clients .counter p').textContent),
+                "order_details": p_list
+            }
+
+            fetch(`${PUBLIC_IP_BACKEND}/order`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            })
+
+            let ordina = document.getElementsByClassName('totale')[0].querySelector('p');
+            ordina.textContent = `TOT: € 0.00`
+
+            show_status.update(value => {
+                return {
+                    tables: true,
+                    categories: false,
+                    products: false,
+                    ordina: false
+                }
+            })
+
+            products_list.update(value => {
+                return []
+            })
+
+            table_selected.update(value => {
+                return "Selezionare un tavolo"
+            })
+        
+            return;
+        }
+
+
         show_status.update(value => {
             return {
                 tables: false,
@@ -26,6 +79,10 @@
                 ordina: true
             }
         })
+
+        let ordina = document.getElementsByClassName('totale')[0].querySelector('p');
+        ordina.textContent = `ORDINA`
+
     }
 
 </script>
