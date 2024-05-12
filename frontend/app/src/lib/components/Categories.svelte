@@ -3,6 +3,7 @@
     import { PUBLIC_IP_BACKEND } from "$env/static/public" 
     import { onMount } from "svelte";
     import { show_status, colors, category_selected } from "$lib/store";
+    import BackArrow from "$lib/components/BackArrow.svelte";
 
     let categories = [{name: "loading...", color: "white"}];
     
@@ -50,6 +51,8 @@
     {/each}
 
 </div>
+
+<BackArrow status="tables" />
 
 
 <style>

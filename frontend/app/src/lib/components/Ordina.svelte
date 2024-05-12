@@ -6,6 +6,7 @@
     import { onMount } from "svelte";
     import tippy from 'tippy.js';
     import 'tippy.js/themes/light.css';
+
     let counter_clients = 0;
     let counter_discount = 0;
 
@@ -16,6 +17,10 @@
     }
 
     totale = totale.toFixed(2);
+
+
+    $: totale_sconto = (totale - counter_discount) <= 0 ? 0 : (totale - counter_discount).toFixed(2);
+
 
     onMount(() => {
         
@@ -70,7 +75,7 @@
 
     <div class="totale-sconto">
         <Icon icon="lucide:receipt-euro" style="font-size: 48px;" class="icon"/>
-        <p> {totale - counter_discount} </p>   
+        <p> { totale_sconto } </p>   
     </div>
 
 </div>

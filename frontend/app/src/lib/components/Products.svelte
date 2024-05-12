@@ -4,6 +4,7 @@
     import { onMount } from "svelte";
     import { show_status, products_list, get_table_selected } from "$lib/store";
     import { colors } from "$lib/store.js";
+    import BackArrow from "$lib/components/BackArrow.svelte";
     
     export let category = "Caffetteria";
     
@@ -28,13 +29,7 @@
         let products_element = document.getElementsByClassName("choice")
         for (let product of products_element) {
             product.addEventListener("click", () => {
-                show_status.update(value => {
-                    value.tables = false;
-                    value.products = false;
-                    value.categories = true;
-                    return value;
-                })
-
+    
                 products_list.update(value => {
                     let p_list = value;
 
@@ -86,6 +81,8 @@
     {/each}
 
 </div>
+
+<BackArrow status="categories" />
 
 
 <style>

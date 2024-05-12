@@ -8,19 +8,11 @@
         title = value;
     });
 
-    
-    /**
-     * @typedef {Object} Product
-     * @property {string} name - The name of the product.
-     * @property {number} price - The price of the product.
-     * @property {number} quantity - The quantity of the product.
-     */
 
-    /** @type {Product[]} */
     let p_list = [];
     products_list.subscribe(value => {    
         if (value.length === 0) {
-            return [];
+            p_list = [];
         }
         p_list = value;
     })
