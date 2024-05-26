@@ -61,8 +61,8 @@ def init_all_table():
 def generate_data():
     global inflation
     inflation = 0
-    years = [2019, 2020]
-    luck = [0.7, 0.2, 0.3, 0.6, 0.5, 0.7]
+    years = [2020, 2021, 2022, 2023, 2024]
+    luck = [0.2, 0.3, 0.6, 0.5, 0.7]
     
     for year, luck_year in zip(years, luck):
         print(f'Generating data for year {year}')
@@ -131,6 +131,11 @@ def get_raw_needed(product_id, raw_id):
     for recipe in data['productrecipe']:
         if recipe['id_prod'] == product_id and recipe['id_raw'] == raw_id:
             return recipe['amount']
+        
+def find_category_by_product(product_id):
+    for product in data['product']:
+        if product['id_prod'] == product_id:
+            return product['category_name']
 
 def isSummer(date):
     return date.month in [6, 7, 8]
@@ -160,7 +165,7 @@ def generate_transaction(date):
         if get_raw_amount < abs_quantity:
             supplier = find_supplier_by_raw(id_raw)
             
-            needed_raw = round((abs_quantity - get_raw_amount) * random.uniform(0.8, 1.2) + 1, 2)
+            needed_raw = round((abs_quantity - get_raw_amount) * random.uniform(0.8, 1.2) + 1, 2) + 1
             price = round(find_price_by_raw(id_raw) * (inflation + random.uniform(0.8, 1.2) * needed_raw), 2)
             
             transaction = Transaction(
@@ -173,6 +178,7 @@ def generate_transaction(date):
         
             try:
                 response = requests.post(f'{API_URL}/transaction/', json=transaction.model_dump())
+                response.raise_for_status()
             except Exception as e:
                 print(e)
 
@@ -196,26 +202,46 @@ def is_product_available(product_id, warehouse):
                     return False
     return True
 
-def update_warehouse(raw_id, amount, warehouse):
-    for raw in warehouse:
-        if raw['id_raw'] == raw_id:
-            raw['amount'] -= amount
-            break
+def update_warehouse(prod_id, amount, warehouse):
+    for recipe in data['productrecipe']:
+        if recipe['id_prod'] == prod_id:
+            raw_id = recipe['id_raw']
+            raw_needed = recipe['amount']
+            for raw in warehouse:
+                if raw['id_raw'] == raw_id:
+                    raw['amount'] -= raw_needed * amount
+                    break
         
-def get_random_product_by_rate(date):
-    products = data['product_rate']
+def get_random_product_by_rate_and_category(date, category):
+    products_tmp = data['product_rate']
+    products = []
+    
+    for product in products_tmp:
+        if find_category_by_product(product['id_prod']) == category:
+            products.append(product)
+    
     if isSummer(date):
         weights = [product['rate'][1] for product in products]
     else: 
         weights = [product['rate'][0] for product in products]
+        
+    products = [product['id_prod'] for product in products]
     
-    product = random.choices(
-        products,
-        weights=weights,
-        k=1
-    )[0]
+    # choose a product with a rate
+    return random.choices(products, weights=weights, k=1)[0]
+
+def get_random_product_by_rate(date):
+    products = data['product_rate']
     
-    return product['id_prod']
+    if isSummer(date):
+        weights = [product['rate'][1] for product in products]
+    else: 
+        weights = [product['rate'][0] for product in products]
+        
+    products = [product['id_prod'] for product in products]
+    
+    # choose a product with a rate
+    return random.choices(products, weights=weights, k=1)[0]
 
 def get_product_price(product_id, type):
     for product in data['product']:
@@ -274,9 +300,15 @@ def generate_orders(n_clients, date):
         n_clients -= group
                 
         list_products = {}
+        starting_category = random.choice(data['category'])['name']
         for _ in range(group):
             for _ in range(random.randint(1, 3)):
-                product_id = get_random_product_by_rate(date)
+                
+                if random.random() < 0.15:
+                    product_id = get_random_product_by_rate(date)
+                else:
+                    product_id = get_random_product_by_rate_and_category(date, starting_category)
+                    
                 if is_product_available(product_id, warehouse):
                     if product_id in list_products:
                         list_products[product_id] += 1
@@ -286,11 +318,10 @@ def generate_orders(n_clients, date):
         
         if list_products == {}:
             continue
-        
+                
         table = generate_table()
         discount, price = generate_price(table, list_products)
         
-
         order = Order(
             date=date.strftime('%Y-%m-%d'),
             billNo=fake.ean(length=8),

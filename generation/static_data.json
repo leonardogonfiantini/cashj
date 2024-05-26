@@ -1,14 +1,14 @@
 {
-
+ 
   "product_rate": [
-    { "id_prod": 1, "rate": [0.8, 0.8] },
+    { "id_prod": 1, "rate": [0.8, 0.7] },
     { "id_prod": 2, "rate": [0.6, 0.5] },
     { "id_prod": 3, "rate": [0.2, 0.2] },
     { "id_prod": 4, "rate": [0.5, 0.8] },
     { "id_prod": 5, "rate": [0.1, 0.2] },
-    { "id_prod": 6, "rate": [0.5, 0.6] },
-    { "id_prod": 7, "rate": [0.5, 0.8] },
-    { "id_prod": 8, "rate": [0.7, 0.7] },
+    { "id_prod": 6, "rate": [0.4, 0.5] },
+    { "id_prod": 7, "rate": [0.5, 0.6] },
+    { "id_prod": 8, "rate": [0.6, 0.6] },
     { "id_prod": 9, "rate": [0.3, 0.5] },
     { "id_prod": 10, "rate": [0.4, 0.6] },
     { "id_prod": 11, "rate": [0.3, 0.5] },
@@ -17,7 +17,7 @@
     { "id_prod": 14, "rate": [0.4, 0.4] },
     { "id_prod": 15, "rate": [0.5, 0.4] },
     { "id_prod": 16, "rate": [0.3, 0.1] },
-    { "id_prod": 17, "rate": [0.7, 0.7] },
+    { "id_prod": 17, "rate": [0.4, 0.5] },
     { "id_prod": 18, "rate": [0.1, 0.2] },
     { "id_prod": 19, "rate": [0.3, 0.2] },
     { "id_prod": 20, "rate": [0.2, 0.2] },
@@ -25,7 +25,7 @@
     { "id_prod": 22, "rate": [0.1, 0.7] },
     { "id_prod": 23, "rate": [0.2, 0.3] },
     { "id_prod": 24, "rate": [0.2, 0.5] },
-    { "id_prod": 25, "rate": [0.6, 0.7] },
+    { "id_prod": 25, "rate": [0.6, 0.6] },
     { "id_prod": 26, "rate": [0.2, 0.1] },
     { "id_prod": 27, "rate": [0.5, 0.4] },
     { "id_prod": 28, "rate": [0.1, 0.1] },
@@ -34,24 +34,42 @@
     { "id_prod": 31, "rate": [0.1, 0.1] },
     { "id_prod": 32, "rate": [0.1, 0.4] },
     { "id_prod": 33, "rate": [0.1, 0.2] },
-    { "id_prod": 34, "rate": [0.6, 0.9] },
-    { "id_prod": 35, "rate": [0.5, 0.8] },
-    { "id_prod": 36, "rate": [0.3, 0.6] },
-    { "id_prod": 37, "rate": [0.3, 0.5] },
-    { "id_prod": 38, "rate": [0.4, 0.3] }
+    { "id_prod": 34, "rate": [0.6, 0.8] },
+    { "id_prod": 35, "rate": [0.5, 0.7] },
+    { "id_prod": 36, "rate": [0.2, 0.4] },
+    { "id_prod": 37, "rate": [0.2, 0.4] },
+    { "id_prod": 38, "rate": [0.4, 0.3] },
+    { "id_prod": 39, "rate": [0.4, 0.5] },
+    { "id_prod": 40, "rate": [0.3, 0.4] },
+    { "id_prod": 41, "rate": [0.4, 0.4] },
+    { "id_prod": 42, "rate": [0.3, 0.4] },
+    { "id_prod": 43, "rate": [0.4, 0.5] },
+    { "id_prod": 44, "rate": [0.3, 0.3] }
   ],
 
+  "category_rate": [
+    { "name": "Caffetteria", "rate": ["Forno", "Caffetteria"] },
+    { "name": "Bibite", "rate": ["Bibite", "Cibi", "Forno", "Birre", "Drink"] },
+    { "name": "Drink", "rate": ["Drink", "Vini", "Amari", "Birre"] },
+    { "name": "Vini", "rate": ["Vini", "Birre", "Amari", "Cibi"] },
+    { "name": "Birre", "rate": ["Birre", "Cibi"] },
+    { "name": "Amari", "rate": ["Amari", "Caffetteria", "Drink"] },
+    { "name": "Cibi", "rate": ["Cibi", "Bibite", "Vini", "Birre"] },
+    { "name": "Forno", "rate": ["Forno", "Caffetteria", "Bibite"] }
+  ],
+ 
   "supplier_product": [
     { "id_supplier": 1, "sell": [ [20, 10], [21, 10], [31, 0.2], [19, 20]] },
-    { "id_supplier": 2, "sell": [ [1, 15], [2, 0.50], [29, 20], [10, 0.2], [32, 0.22], [34, 0.4], [35, 0.43]] },
+    { "id_supplier": 4, "sell": [ [1, 15], [2, 0.50], [29, 20]] },
     { "id_supplier": 3, "sell": [ [18, 5], [24, 1], [23, 5]] },
-    { "id_supplier": 4, "sell": [ [3, 0.40], [4, 0.40]] },
+    { "id_supplier": 2, "sell": [ [3, 0.40], [4, 0.40], [10, 0.2], [32, 0.22], [34, 0.4], [35, 0.43]] },
     { "id_supplier": 5, "sell": [ [5, 10], [6, 15], [7, 15], [8, 6], [15, 15], [16, 15], [17, 20], [25, 5], [26, 8], [27, 12], [28, 10], [33, 11]] },
     { "id_supplier": 6, "sell": [ [11, 3], [12, 2.5], [13, 3]] },
     { "id_supplier": 7, "sell": [ [9, 5], [14, 7], [36, 10]] },
-    { "id_supplier": 8, "sell": [ [22, 0], [30, 0]] }
+    { "id_supplier": 8, "sell": [ [22, 0], [30, 0]] },
+    { "id_supplier": 9, "sell": [ [37, 0.5], [38, 1], [39, 0.5], [40, 0.5], [41, 0.5], [42, 0.5]] }
   ],
-
+ 
   "supplier": [
       { "id_supplier": 1, "name": "Con mollica o senza", "address": "Via delle tarantole, 1, Sant'Ilario", "email": "mollica@senza.it", "phone": "3456786780" },
       { "id_supplier": 2, "name": "Sogegross", "address": "Piazza dei girasoli 5, San Fruttuoso", "email": "sososogegross@mail.it", "phone": "3469012345" },
@@ -60,9 +78,10 @@
       { "id_supplier": 5, "name": "Liqui-liqui-liquo", "address": null, "email": null, "phone": null },
       { "id_supplier": 6, "name": "Birrificio Gonfiantini", "address": "Via delle birre 1, Genova", "email": null, "phone": "3456786786" },
       { "id_supplier": 7, "name": "Cantine Scala", "address": "Via dei vini 1, Genova", "email": null, "phone": "3456436787" },
-      { "id_supplier": 8, "name": "Casa", "address": null, "email": null, "phone": null }
+      { "id_supplier": 8, "name": "Casa", "address": null, "email": null, "phone": null },
+      { "id_supplier": 9, "name": "Antico forno di Ahsan", "address": "Via delle brioches 12", "email": "ahsan@paniebrioches.com", "phone": null}
   ],
-
+ 
   "product": [
       { "id_prod": 1, "name": "Caffè", "description": "Caffè miscela 100% arabica", "price_u_retail": 1.00, "price_u_table": 1.50, "category_name": "Caffetteria"},
       { "id_prod": 2, "name": "Cappuccino", "description": "Caffè con latte e schiuma di latte", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Caffetteria"},
@@ -101,9 +120,15 @@
       { "id_prod": 35, "name": "Acqua frizzante 1/2 litro", "description": "Acqua minerale frizzante", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Bibite"},
       { "id_prod": 36, "name": "Acqua naturale 1,5 litri", "description": "Acqua minerale naturale", "price_u_retail": 2.50, "price_u_table": 3.00, "category_name": "Bibite"},
       { "id_prod": 37, "name": "Acqua frizzante 1,5 litri", "description": "Acqua minerale frizzante", "price_u_retail": 2.50, "price_u_table": 3.00, "category_name": "Bibite"},
-      { "id_prod": 38, "name": "Ormeasco doc", "description": "Vino rosso della casa al calice", "price_u_retail": 5.00, "price_u_table": 6.00, "category_name": "Vini"}
+      { "id_prod": 38, "name": "Ormeasco doc", "description": "Vino rosso della casa al calice", "price_u_retail": 5.00, "price_u_table": 6.00, "category_name": "Vini"},
+      { "id_prod": 39, "name": "Focaccia", "description": "Focaccia genovese", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Forno"},
+      { "id_prod": 40, "name": "pizza", "description": "Pizza margherita", "price_u_retail": 2.00, "price_u_table": 2.50, "category_name": "Forno"},
+      { "id_prod": 41, "name": "Brioche crema", "description": "Brioche alla crema", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Forno"},
+      { "id_prod": 42, "name": "Brioche marmellata", "description": "Brioche alla marmellata", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Forno"},
+      { "id_prod": 43, "name": "Brioche cioccolato", "description": "Brioche al cioccolato", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Forno"},
+      { "id_prod": 44, "name": "Brioche vuota", "description": "Brioche vuota", "price_u_retail": 1.50, "price_u_table": 2.00, "category_name": "Forno"}
   ],
-
+ 
   "category": [
       { "name": "Caffetteria", "description": "Caffè di ogni tipo, cappuccini, latte e tutte le loro varianti" },
       { "name": "Bibite", "description": "Acqua, bibite gassate, bibite analcoliche" },
@@ -111,11 +136,12 @@
       { "name": "Vini", "description": "Vini bianchi, rossi, rosati, spumanti, champagne" },
       { "name": "Birre", "description": "Birre artigianali, birre industriali, birre straniere" },
       { "name": "Amari", "description": "Amari alle erbe, limoncello, grappa, liquori d'ogni dove" },
-      { "name": "Cibi", "description": "Snack da accompagnamento, piatti Caldi e piatti freddi per pranzi e cene" }
+      { "name": "Cibi", "description": "Snack da accompagnamento, piatti Caldi e piatti freddi per pranzi e cene" },
+      { "name": "Forno", "description": "Brioches, focaccia, pizza ed altre prelibatezze" }
   ],
-
+ 
   "rawproduct" : [
-      { "id_raw": 1, "name": "Caffè in grani", "uom": "kg", "amount": 5 },
+      { "id_raw": 1, "name": "Caffè in grani", "uom": "kg", "amount": 100 },
       { "id_raw": 2, "name": "Latte", "uom": "lt", "amount": 12 },
       { "id_raw": 3, "name": "Coca cola", "uom": "pz", "amount": 30 },
       { "id_raw": 4, "name": "Fanta", "uom": "pz", "amount": 12 },
@@ -150,9 +176,15 @@
       { "id_raw": 33, "name": "Campari", "uom": "lt", "amount": 3 },
       { "id_raw": 34, "name": "Acqua naturale 1,5 litri", "uom": "pz", "amount": 40 },
       { "id_raw": 35, "name": "Acqua frizzante 1,5 litri", "uom": "pz", "amount": 40 },
-      { "id_raw": 36, "name": "Ormeasco doc", "uom": "lt", "amount": 8 }
+      { "id_raw": 36, "name": "Ormeasco doc", "uom": "lt", "amount": 8 },
+      { "id_raw": 37, "name": "Focaccia", "uom": "pz", "amount": 40 },
+      { "id_raw": 38, "name": "Pizza", "uom": "pz", "amount": 30 },
+      { "id_raw": 39, "name": "Brioche crema", "uom": "pz", "amount": 50 },
+      { "id_raw": 40, "name": "Brioche marmellata", "uom": "pz", "amount": 40 },
+      { "id_raw": 41, "name": "Brioche cioccolato", "uom": "pz", "amount": 40 },
+      { "id_raw": 42, "name": "Brioche vuota", "uom": "pz", "amount": 40 }
   ],
-
+ 
   "productrecipe": [
       { "id_prod": 1, "id_raw": 1, "amount": 0.006 },
       { "id_prod": 2, "id_raw": 1, "amount": 0.006 },
@@ -220,6 +252,12 @@
       { "id_prod": 35, "id_raw": 32, "amount": 1 },
       { "id_prod": 36, "id_raw": 34, "amount": 1 },
       { "id_prod": 37, "id_raw": 35, "amount": 1 },
-      { "id_prod": 38, "id_raw": 36, "amount": 0.3 }
+      { "id_prod": 38, "id_raw": 36, "amount": 0.3 },
+      { "id_prod": 39, "id_raw": 37, "amount": 1 },
+      { "id_prod": 40, "id_raw": 38, "amount": 1 },
+      { "id_prod": 41, "id_raw": 39, "amount": 1 },
+      { "id_prod": 42, "id_raw": 40, "amount": 1 },
+      { "id_prod": 43, "id_raw": 41, "amount": 1 },
+      { "id_prod": 44, "id_raw": 42, "amount": 1 }
   ]
 }
