@@ -61,8 +61,8 @@ def init_all_table():
 def generate_data():
     global inflation
     inflation = 0
-    years = [2020, 2021, 2022, 2023, 2024]
-    luck = [0.2, 0.3, 0.6, 0.5, 0.7]
+    years = [2020, 2021, 2022, 2023]
+    luck = [0.3, 0.5, 0.7, 0.6]
     
     for year, luck_year in zip(years, luck):
         print(f'Generating data for year {year}')
@@ -91,15 +91,15 @@ def luck_day(date, luck_year):
 def clients_day(luck):
     clients = 0
     if luck > 0.8:
-        clients = random.randint(800, 1000) * luck
+        clients = random.randint(700, 900) * luck
     elif luck > 0.6:
-        clients = random.randint(500, 800) * luck
+        clients = random.randint(400, 700) * luck
     elif luck > 0.4:
-        clients = random.randint(300, 500) * luck
+        clients = random.randint(200, 400) * luck
     elif luck > 0.2:
-        clients = random.randint(200, 300) * luck
+        clients = random.randint(100, 200) * luck
     else:
-        clients = random.randint(0, 200) * luck
+        clients = random.randint(0, 100) * luck
     
     return int(clients)
 
